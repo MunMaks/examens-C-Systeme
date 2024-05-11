@@ -1,3 +1,7 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+
 /*
 Q1) Lister les éventuels effets de bords et donner la valeur de l’expression
     sous-jacente à chacune des instructions du morceau de programme suivant:
@@ -116,7 +120,7 @@ Car si on effectue le changement de A.h alors il faut recompiler tout ce qui inc
     Pour chacune des quatre couleurs (noir, rouge, vert, bleu), on souhaite représenter la quantité d’encre
     restante (de 0 pour vide, à 100 pour plein), et on doit également représenter si une pointe est sortie
     ainsi que sa couleur.
-
+*/
 typedef enum couleur{
     noir,
     rouge,
@@ -133,14 +137,100 @@ typedef struct {
 typedef struct quatre_couleurs{
     Stylo pencil[4];
 } QuatreCouleurs;
-*/
+
 
 
 /*
 [Q10] Écrire une fonction transformer_titre paramétrée par une chaine de caractère chaine qui
     modifie chaine afin que chaque mot commence par une majuscule suivi de minuscules.
     Un mot est une suite de lettres de l’alphabet délimitée par n’importe quel autre caractère (chiffre, ponctuation, espace ...).
-    Par exemple, la chaine de caractères "ceCi␣n’eSt␣PAS␣rai5onN4ble" devient "Ceci␣N’Est␣Pas␣Rai5Onn4Ble".
+    Par exemple, la chaine de caractères "ceCi n’eSt PAS rai5onN4ble" devient "Ceci N’Est Pas Rai5Onn4Ble".
 
 
 */
+
+char to_upper(char c){
+    if ('a' <= c && c <= 'z'){
+        return c - 'a' + 'A';
+    }
+    return c;    /* rien a faire si c'est pas une lettre minuscule */
+}
+
+char to_lower(char c){
+    if ('A' <= c && c <= 'Z'){
+        return c - 'A' + 'a';
+    }
+    return c;    /* rien a faire si c'est pas une lettre majuscule */
+}
+
+/*
+    On suppose que chaine est `char []`
+    Sinon on ne peut rien changer
+*/
+void transformer_titre(char chaine[]){
+    int espace = 1;    /* pour la premiere fois*/
+    int i = 0;
+    for (i = 0; chaine[i]; ++i){
+        if (espace){
+            chaine[i] = to_upper(chaine[i]);
+            espace = 0;
+        }
+        if (chaine[i] == ' '){     /* si c'est un espace */
+            espace = 1;
+        }
+        chaine[i] = to_lower(chaine[i]);
+    }
+}
+
+
+/*
+[Q11] Écrire une fonction melange paramétrée par un tableau de chaines de caractères et renvoie
+    une nouvelle chaine de caractères construite en prenant successivement les premiers caractères de
+    chaque chaine, puis les deuxièmes caractères et ainsi de suite jusqu’à ce qu’il n’y ait plus de lettre.
+    Par exemple, le résultat sur le tableau de chaines de caractères {"aeik", "bf", "cg", "", "dhj"}
+    est la chaine "abcdefghijk".
+
+*/
+
+/* équivalent à strlen() de string.h */
+int longueur(char *mot){
+    int i = 0;
+    while (*mot++) ++i;
+    return i;
+}
+
+
+char *melange(char *tab[], size_t taille){
+    char *result = NULL;
+    int i = 0, curr_idx = 0, new_taille = 0, result_idx = 0;
+    
+    for (i = 0; i < taille; ++i)
+        new_taille += longueur(tab[i]);
+    
+    /* sizeof(*result) == sizeof(char) */
+    result = malloc(sizeof(*result) * (new_taille + 1));    /* new_taille + 1, il faut ajouter '\0' à la fin */
+    if ( !(result) ){
+        fprintf(stderr, "Pas de memoire\n");
+        return NULL;
+    }
+
+    while (result_idx < new_taille + 1){
+        for (i = 0; i < taille; ++i){
+            if (curr_idx < longueur(tab[i])){    /* si l'indice est valide, alors tout est bon! */
+                result[result_idx] = tab[i][curr_idx];
+                ++result_idx;
+            }
+        }
+        curr_idx++;
+    }
+    
+    result[result_idx] = '\0';
+    return result;
+}
+
+
+
+
+
+
+
