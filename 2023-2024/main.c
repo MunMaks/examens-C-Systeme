@@ -1,9 +1,16 @@
+/*
+    Préparé par MUNAITPASOV M.
+    Université Gustave Eiffel
+
+    Pour trouver la question souhaitée, cherchez par [Qn], avec n = {1, ..., 16}
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
 
 /*
-Q1) Lister les éventuels effets de bords et donner la valeur de l’expression
+[Q1] Lister les éventuels effets de bords et donner la valeur de l’expression
     sous-jacente à chacune des instructions du morceau de programme suivant:
     1) int a, b, *p;                             // pas d'effets de bords  déclaration de 3 variables: a (entier), b (entier), p (pointeur vers un entier)
     2) a = b = 2;                                // effets de bords,       attribution de la valeur 2 à `b` et puis à `a` 
@@ -17,7 +24,7 @@ Q1) Lister les éventuels effets de bords et donner la valeur de l’expression
 
 
 /*
-Q2) En supposant que y est un identificateur de variable de type float *,
+[Q2] En supposant que y est un identificateur de variable de type float *,
     donner le type de l’expression *(&y + 1)- 1. Justifier la réponse.
 
 float *y;
@@ -32,7 +39,7 @@ Regardons cet exemple:
 
 
 /*
-Q3) En supposant que x est un identificateur de variable de type int** et y un identificateur de
+[Q3] En supposant que x est un identificateur de variable de type int** et y un identificateur de
     variable de type int, écrire une instruction dans laquelle la sous-expression y apparaît en tant que
     valeur droite et la sous-expression *(x + 1) en tant que valeur gauche.
 
@@ -228,9 +235,202 @@ char *melange(char *tab[], size_t taille){
     return result;
 }
 
+/*
+Si vous voulez vérifier si cette fonction fonctionne, vous pouvez tester avec ça:
+int main(void){
+    char *tab[] = {"aeik", "bf", "cg", "", "dhj"};
+    int taille = 5;
+    char *result = melange(tab, taille);
+    printf("result: %s, taille: %d\n", result, longueur(result));
+    return 0;
+}
+*/
+
+
+/*
+[Q12] Écrire une fonction compte_lettre_a à gestion d’erreur paramétrée par un nom de fichier nom
+    et qui renvoie le nombre d’occurences de la lettre ’a’ dans le fichier.
+*/
+
+int compte_lettre_a(char *nom_fichier){
+    int count = 0, c = 0;
+    FILE *fptr = fopen(nom_fichier, "r");
+    if (!fptr){
+        fprintf(stderr, "Le fichier n'est pas trouver\n");
+        return 0;
+    }
+    while ( (c = fgetc(fptr)) != EOF ){
+        if (c == 'a') ++count;
+    }
+    return count;
+}
 
 
 
+/*
+[Q13] Écrire une fonction combine_tabs paramétrée par deux tableaux de même taille d’entiers de
+    type int et un pointeur sur une fonction f à type de retour int et à deux paramètres de type int.
+    La fonction renvoie un nouveau tableau de la même taille que ses arguments et dont l’élémént d’indice
+    `i` est le résultat de l’application de f aux deux éléments d’indices i des tableaux en paramètre.
+*/
+
+
+int *combine_tabs(int *tab_un, int *tab_deux, size_t taille, int (*f)(int, int)){
+    int i = 0;
+    for (i = 0; i < taille; ++i){
+        tab_un[i] = f(tab_un[i], tab_deux[i]);
+    }
+    return tab_un;
+}
+
+/*
+On n'est pas obligé d'allouer dynamiquement la mémoire pour un nouveau tableau,
+mais si on veut l'ajouter, il faut faire ça:
+
+int *combine_tabs(int *tab_un, int *tab_deux, size_t taille, int (*f)(int, int)){
+    int i = 0;
+    int *new_tableau = malloc(sizeof(*new_tableau) * taille);
+    if (!new_tableau){
+        fprintf(stderr, "Pas de memoire pour nouveau tableau\n");
+        return NULL;
+    }
+    for (i = 0; i < taille; ++i){
+        new_tableau[i] = f(tab_un[i], tab_deux[i]);
+    }
+    return new_tableau;
+}
+*/
+
+
+/*
+[Q14] Écrire une fonction equiv_rotation paramétrée par deux nombres de 64 bits (non signés) et
+    renvoie 1 si les bits du premier nombre sont les mêmes que ceux du second à rotation près et renvoie
+    0 sinon. Par exemple sur 8 bits, les nombres 01110010 et 01001110 sont les mêmes par une rotation
+    de 3 bits vers la droite : 01110010 -> 01001110
+*/
+typedef unsigned long long ull;
+
+ull reverse_bits(ull chiffre) {
+    ull result = 0;
+    int i = 0;
+    int decaler = 0, bit_poids_faible = 0;
+    for (i = 0; i < 64; ++i) {
+        decaler = 63 - i;
+        bit_poids_faible = (chiffre >> i) & 1;
+
+        /* logique `ou` pour avoir le bit poidsfaible à la position du bit de poids fort */
+        result |= bit_poids_faible << decaler;  
+    }
+    return result;
+}
+
+int equiv_rotation(ull a, ull b){
+    return reverse_bits(a) == b;
+}
+
+/*
+[Q15] Écrire une fonction plus_long_suffixe paramétrée par deux nombres de 64 bits (non signés)
+    et qui renvoie la taille du plus long suffixe commun dans l’écriture binaire des deux nombres.
+    Par exemple, les nombres 0...0100110 et 0....0101110 ont comme plus grand suffixe commun les 3 bits 110.
+*/
+
+
+int plus_long_suffixe(ull a, ull b){
+    int count = 0, i = 0;
+    int bit_faible_a = 0, bit_faible_b = 0;
+    for (i = 0; i < 64; ++i){
+        bit_faible_a = (a >> i) & 1;
+        bit_faible_b = (b >> i) & 1;
+
+        /* si l'un d'entre est different, on renvoie la réponse*/
+        if (bit_faible_a ^ bit_faible_b) {
+            return count;
+        }
+        ++count;
+    }
+    return count;
+}
 
 
 
+/*
+    [Q16] Donner en justifiant les erreurs présentes dans cet extrait de code de la fonction main :
+
+                                                                              // problème numéro 0)    au début de la feuille, on n'a pas inclus <string.h>
+                                                                              // problème numéro 1)    on doit être sur que main a (`argc` et `argv`) pour pouvoir les utiliser plus tard
+                                                                              // problème numéro 2)    il vaut mieux changer (argc == 4) à (argc >= 4)
+    if (argc == 4 && argv[1] == "compare") {                                  // problème numéro 3)    une mauvaise comparaison (la correction en bas)
+        int different = (strlen(argv[2]) != strlen(argv[3]));                 // problème numéro 4)    la valeur n'est pas accessible après (la correction en bas)
+                                                                              // problème numéro 5)    la valeur de `different` après avoir vérifié la longueur n'est pas utilisée
+        for (int i = 0; i < strlen(argv[2]) && i < strlen(argv[3]); i++) {    // problème numéro 6)    les calculs inutiles
+            if (argv[2][i] != argv[3][i])                                     // problème numéro 7)    les accolades oubliées
+                different = 1;
+                break;
+        }
+    }
+    if (different) printf("%s␣et␣%s␣sont␣différents\n", argv[2], argv[3]);      // la conséquence de problème 4)
+                                                                              // problème numéro 8) (complémentaire) il faut renvoie 0   
+*/
+
+
+
+/* le main correcte: */
+
+/* il faut l'inclure pour pouvoir utiliser les fonctions: strlen(), strcmp()... */
+#include <string.h>
+
+int main(int argc, char *argv[]){    /* un bon prototype */
+
+    /* un autre erreur fait dans main, n'est pas accessible, car la valeur est parti de la pile */
+    int different = 0;    
+    
+    /* d'abord il faut verifier si nous avons au moins 4 arguments
+        (notre programme fonctionne également s'il y a plus de 4 arguments) */
+    if (argc >= 4){
+        /*
+            il est interdit de faire argv[1] == "compare", car vous faites la comparaison de argv[1][0] == 'c'
+            donc on utilise la fonction strcmp()
+        */
+        if ( !strcmp(argv[1], "compare") ){
+
+            /*  problème suivant: dans les boucle il vaut mieux ne pas appeler les fonctions qui parcours la chaine
+                Vous empirez la complexité, donc faites les calculs de la longueur avant. */
+            int longueur_un = strlen(argv[2]);
+            int longueur_deux = strlen(argv[3]);
+
+            /* on n'utilise pas la valeur de `different` après avoir vérifié la longueur
+                donc j'ajoute cette condition dans boucle for */
+            different = longueur_un != longueur_deux;
+            for (int i = 0; i < longueur_un && i < longueur_deux && !different; i++){
+                if (argv[2][i] != argv[3][i]){    /* il faut pas oublier qu'il faut ajouter les accolades, s'il y a plus d'une instruction */
+                    different = 1;
+                    break;
+                }
+            }
+            /* de plus il faut l'ajouter cette vérification à l'intérieur de premier if
+            car sinon c'est segfault (vous n'avez pas droit d'accéder à argv[2] ou argv[3]) */
+            if (different) printf("%s et %s sont différents\n", argv[2], argv[3]);
+        }
+
+    }
+    /* il ne faut pas oublier de renvoie 0 à la fin */
+    return 0;
+}
+
+/* sinon, si c'était moi qui je le faisais, je le ferais comme ça :
+    Ce petit programme vérifie juste si c'est bien
+
+#include <stdio.h>    // pour printf()
+#include <string.h>   // pour strcmp()
+
+int main(int argc, char *argv[]){
+    if (argc < 4) return 1;    // pas assez d'arguments 
+    
+    // première condition vérifie si c'est la mode de comparaison
+    // deuxième condition vérifie si strcmp() renvoie une valeur différente de 0 (donc n'est pas égale)
+    if ( !strcmp(argv[1], "compare") && strcmp(argv[2], argv[3]) ){
+        printf("%s et %s sont différents\n", argv[2], argv[3]);
+    }
+    return 0;
+}
+*/
