@@ -1,0 +1,205 @@
+                                        L2 informatique - Université Paris Est à Marne-La-Vallée
+                                 Architecture des systèmes informatiques : Examen première session 2018-2019
+        Durée de l’épreuve : 2 heures
+        Les notes de cours, de TD et de TP ne sont pas autorisées. Les ordinateurs, calculatrices ainsi que les téléphones
+        sont interdits et éteints durant l’épreuve. Il est possible à tout moment d’admettre la réponse (algorithme, fonction,
+        programme, etc.) à une question non traitée à condition de le préciser explicitement. Il est très fortement préconisé de
+        lire exhaustivement l’énoncé avant de commencer à répondre aux exercices.
+
+        Les justifications et explications sont toujours plus importantes que les résultats attendus aux questions. Ainsi, la qualité
+        de la rédaction de vos réponses aura un impact très important sur la notation. Fournir un résultat correct sans aucune
+        explication ne donne aucun point. Fournir une explication valide avec un résultat erroné peut donner un grand nombre de
+        points sur les questions.
+        Le barème est juste donné à titre indicatif, il donne un indice sur la longueur et la difficulté des exercices.
+
+
+Exercice 1 : Ouais, j’ai lu le cours 5 minutes... (4 points)
+1) Dans quels endroits peut-on trouver de la mémoire dans un ordinateur moderne ?
+
+2) Citez des spécificités qui caractérisent l’essence des systèmes d’exploitation de type Unix?
+
+3) À quoi sert le shell dans les systèmes de types Unix ? Que peut-on faire avec ?
+
+4) À quoi sert le pipe | en bash ? Comment cela fonctionne ?
+
+
+
+Les réponses:
+1)
+    1.1) Mémoire vive (RAM) : C'est la mémoire principale de l'ordinateur où les programmes et les données sont
+                            chargés temporairement pendant qu'ils sont en cours d'utilisation
+
+    1.2) Mémoire de stockage (morte) (disque dur ou SSD) : Le disque dur ou le SSD (Solid State Drive) est utilisé pour
+                            stocker de manière permanente les programmes, les fichiers et le système d'exploitation de l'ordinateur
+
+    1.3) Mémoire cache : La mémoire cache est une mémoire intermédiaire située entre le processeur et la RAM
+
+    1.4) Mémoire graphique (VRAM) : La mémoire graphique, également appelée VRAM (Video RAM),
+                                    est utilisée par la carte graphique pour stocker les données d'image et de texture
+                                    temporaires nécessaires à l'affichage sur l'écran
+
+
+2) Les systèmes d'exploitation de type Unix sont caractérisés par leur architecture modulaire,
+    leur interface en ligne de commande puissante, leur capacité multitâche et multi-utilisateur,
+    leur gestion avancée des fichiers et des permissions, leur stabilité et leur portabilité.
+
+
+3) Le shell dans les systèmes Unix est un outil polyvalent qui permet aux utilisateurs
+    d'interagir avec le système d'exploitation, d'automatiser des tâches, de gérer les fichiers et les processus,
+    de contrôler les utilisateurs et les permissions, d'interagir avec les données et d'accéder aux ressources réseau.
+
+4) Le pipe `|` en bash permet de rediriger la sortie (stdout) d'une commande vers l'entrée (stdin) d'une autre commande.
+    Cela permet de chaîner plusieurs commandes ensemble, créant ainsi des flux de données entre elles.
+    Les pipes sont utiles pour combiner des commandes simples et effectuer des opérations complexes en une seule ligne de commande.
+
+
+
+
+
+
+
+Exercice 2 : Lire dans les pensées (4 points)
+Dans cet exercice, on vous propose des commandes Unix évoluées et fonctionnelles.
+Pour chacune de ces commandes, vous devez deviner précisément les intentions de auteur.
+
+Bonus : Devinez les intentions de l’auteur de la commande et précisez s’il fait des erreurs (lesquelles, pourquoi…)
+
+1) ls -al | grep "^d" | wc -l
+
+2) find my_code -name "*.py" | xargs cat | grep "^[ ]*for"
+
+3) On a un fichier personnes.csv dont les lignes ont la structure suivante : identifiant numérique, nom, prénom, age, mail.
+    La commande est alors la suivante : cat personnes.csv | grep "Martin" | wc -l
+
+4) cat personnes.csv | cut -f 3 -d ',' | uniq | sort | wc -l
+
+
+
+Les réponses:
+1) $ ls -al | grep "^d" | wc -l
+
+première commande: affiche tous les fichiers et répertoires avec les détails et renvoie sa sorite vers la sortie standard
+deuxième commande: prend la sortie standard de la commande précedente comme l'entrée standard
+                   et effectue le triage en cherchant les fichiers et répertoires qui commencent pas `d`
+troisième commande: prend la sortie standard de la commande précedente comme l'entrée standard
+                    et effectue compte le nombre de lignes renvoyé par la deuxième commande
+
+
+2) $ find my_code -name "*.py" | xargs cat | grep "^[ ]*for"
+
+    `find my_code -name "*.py"` recherche tous les fichiers avec l'extension ".py" dans le répertoire "my_code".
+    Ensuite, `xargs cat` lit le contenu de chaque fichier trouvé, et
+    `grep "^[ ]*for"` filtre les lignes commençant par "for", en tenant compte des espaces éventuels avant "for".
+
+
+3) cat personnes.csv | grep "Martin" | wc -l
+
+    `cat personnes.csv` affiche le contenu du fichier "personnes.csv".
+    Ensuite, `grep "Martin"` filtre les lignes contenant le nom "Martin".
+    Enfin, `wc -l` compte le nombre de ces lignes.
+
+
+4) cat personnes.csv | cut -f 3 -d ',' | uniq | sort | wc -l
+
+    `cat personnes.csv` affiche le contenu du fichier "personnes.csv".
+    Ensuite, `cut -f 3 -d ','` extrait la troisième colonne (les prénoms) en utilisant "," comme délimiteur.
+    Puis, `uniq` supprime les lignes en double (prénoms répétés).
+    Enfin, `sort` trie les prénoms
+    et `wc -l` compte le nombre total de prénoms uniques.
+
+
+Exercice 3 : changements de base (4 points)
+1) Qu’affiche le programme suivant sur sa sortie standard ?
+    #include <stdio.h>
+    int main(int argc, char* argv[]){
+        printf("%X %X %X %X %X\n", 23, 54, 123, 241, 93);
+        return 0;
+    }
+
+2) Écrire en binaire la donnée hexadécimale suivante : 33 AA 3F D4 99 ?
+
+
+Les réponses:
+1)  $ ./main
+    17 36 7B F1 5D
+
+2) Pour faire ça, il faut se rappeler que:
+    0 - 0000,
+    1 - 0001,
+    2 - 0010,
+    ...
+    13 - 1101,
+    14 - 1110,
+    15 - 1111
+
+    Donc on aura:
+       33        AA        3F        D4        99
+    00110011  10101010  00111111  11010100  10011001
+
+
+
+
+Exercice 4 : Manipulations de fichiers (4 points)
+En partant des trois fichiers et d’un répertoire suivants :
+    nborie@bayer:$ ls -lR
+    .:
+    total 4
+    drwxr-xr-x 2 nborie nborie 4096 mai 14 07:19 d
+    -rw-r--r-- 1 nborie nborie 0    mai 14 07:19 f1
+    -rw-r--r-- 1 nborie nborie 0    mai 14 07:19 f2
+    -rw-r--r-- 1 nborie nborie 0    mai 14 07:19 f3
+    ./d:
+    total 0
+
+    Sachant que l’utilisateur nborie connaît le mot de passe super-utilisateur,
+    quelles commandes doit-il faire pour obtenir la configuration suivante:
+    nborie@bayer:$ ls -lR
+    .:
+    total 4
+    drwxr-xr-x 2 nborie nborie 4096 mai 14 07:19 d
+    -rwxr-xr-x 1 nborie nborie 0    mai 14 07:19 f1
+    -rw-r--r-- 1 root   nborie 0    mai 14 07:19 f2
+    ./d:
+    total 1
+    -rwxrwxrwx 1 nborie nborie 0    mai 14 07:19 f3
+
+
+La réponse:
+nborie@bayer:$ chmod 733 f1
+nborie@bayer:$ chmod 777 f3
+nborie@bayer:$ mv f3 d/
+
+
+
+Exercice 5 : Fabricant de composants (6 points)
+    Une U.A.L. utilise le circuit suivant dans une de ses primitives processeurs.
+    Ce circuit est composé de 6 postes XOR (ou exclusif).
+    Il prend en argument un mot binaire sur 4 bits et a pour sortie un autre mot binaire sur 4 bits.
+
+    `Figure 1 sur la page 2`
+
+    Décrire son effet et proposer un autre circuit produisant exactement
+    les mêmes calculs avec moins de portes logiques.
+
+
+C'était intéressant et la réponse:
+b1 = a2
+b2 = a1
+b3 = a4
+b4 = a3
+
+a1 a2 a3 a4
+|  |  |  |
+|  |  |  |
+v  v  v  v
+b1 b2 b3 b4
+
+
+
+
+
+
+
+
+
+

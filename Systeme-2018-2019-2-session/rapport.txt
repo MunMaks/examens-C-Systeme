@@ -1,0 +1,93 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Exercice 4 : Table de vérité (4 points)
+    Écrire une fonction C qui affiche la table de vérité
+    de l’expression logique `a ou ((non b) et c)`.
+    Voici une suggestion d’affichage en console
+    a | b | c | expr
+    0 | 0 | 0 | 0
+    0 | 0 | 1 | 1
+    etc...
+
+#include <stdio.h>
+
+void fonction_C(int a, int b, int c){
+    int result = a | ( (!b) & c );  // expression demandée
+
+    printf("a | b | c | expr\n");
+    for (int i = 0; i < 2; ++i){
+        for (int j = 0; j < 2; ++j){
+            for (int k = 0; k < 2; ++k){
+                printf("%d | %d | %d | %d\n", i, j, k, result);
+            }
+        }
+    }
+}
+
+
+
+Exercice 5 : Traçage d’exécution (4 points)
+Un grand écrivain propose le fichier suivant qu’il sauvegarde sous le nom zarby.py.
+    #!/usr/bin/python3
+def zarby(n, m):
+    print(" "*m + str((n, m)))
+    if (m == 0):
+        if (n == 0):
+            return 1
+        return 1 + zarby(n-1, n-1)
+    return 1 + zarby(n, m-1)
+
+print(zarby(5, 2))
+
+Cette personne essaie d’exécuter ce nouveau fichier fraîchement créé mais obtient le message suivant :
+    nborie@bayer:$ ./zarb.py
+    bash: ./zarb.py: Permission non accordée
+
+    1) Quelle est l’erreur produite par cet informaticien de niveau 1 ? Comment peut-on exécuter son fichier ?
+
+    2) Quel est l’affichage produit en console lorsque l’on exécute son fichier ?
+
+
+Les réponses:
+
+1) Il faut de donner à l'utilisateur la permission d'exécuter le fichier:
+    $ chmod +x zarby.py
+
+    # Pour exécuter son fichier:
+    $ ./zarby.py
+
+2) P.S. J'ai aucune idée comment ils veulent qu'on l'exécute, mais si on doit faire en papier:
+  (5, 2)
+ (5, 1)
+(5, 0)
+    (4, 4)
+   (4, 3)
+  (4, 2)
+ (4, 1)
+(4, 0)
+   (3, 3)
+  (3, 2)
+ (3, 1)
+(3, 0)
+  (2, 2)
+ (2, 1)
+(2, 0)
+ (1, 1)
+(1, 0)
+(0, 0)
+18
