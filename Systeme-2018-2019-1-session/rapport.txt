@@ -56,8 +56,6 @@ Les réponses:
 
 
 
-
-
 Exercice 2 : Lire dans les pensées (4 points)
 Dans cet exercice, on vous propose des commandes Unix évoluées et fonctionnelles.
 Pour chacune de ces commandes, vous devez deviner précisément les intentions de auteur.
@@ -106,6 +104,8 @@ troisième commande: prend la sortie standard de la commande précedente comme l
     Puis, `uniq` supprime les lignes en double (prénoms répétés).
     Enfin, `sort` trie les prénoms
     et `wc -l` compte le nombre total de prénoms uniques.
+
+
 
 
 Exercice 3 : changements de base (4 points)
@@ -171,6 +171,8 @@ nborie@bayer:$ mv f3 d/
 
 
 
+
+
 Exercice 5 : Fabricant de composants (6 points)
     Une U.A.L. utilise le circuit suivant dans une de ses primitives processeurs.
     Ce circuit est composé de 6 postes XOR (ou exclusif).
@@ -182,24 +184,136 @@ Exercice 5 : Fabricant de composants (6 points)
     les mêmes calculs avec moins de portes logiques.
 
 
-C'était intéressant et la réponse:
-b1 = a2
-b2 = a1
-b3 = a4
-b4 = a3
 
-a1 a2 a3 a4
-|  |  |  |
-|  |  |  |
-v  v  v  v
-b1 b2 b3 b4
+La réponse:
+C'était intéressant:
+    b1 = a2
+    b2 = a1
+    b3 = a4
+    b4 = a3
 
+    a1 a2 a3 a4
+    |  |  |  |
+    |  |  |  |
+    v  v  v  v
+    b1 b2 b3 b4
 
-
-
-
-
+Si vous ne comprenez pas, je vous invite à voir l'image (circuit.jpg)
 
 
 
+
+
+
+
+Exercice 6 : Faites le planning (4 points)
+    On possède une machine à un seul coeur, elle ne peut exécuter qu’une seule tâche en même temps. Cette machine exécute
+    plusieurs programmes simultanément (speudo-simultanément car un seul processus est élu à chaque quantum de temps
+    pour exécution).
+    L’ordonnanceur de cette machine suit les règles suivantes :
+        • Il y a trois niveaux de priorité : fort - normal - faible. Tous les processus de niveau fort doivent être exécutés avant
+        les processus de niveau normal et tous les processus de niveau normal doivent être exécutés avant les processus de
+        niveau faible.
+        • À même niveau de priorités, les processus en attentes sont traités de manières équitables. L’ordonnanceur fait ainsi
+        le tourniquet (algorithme de Round-Robin) parmi ces tâches pour distribuer les quantums de temps.
+        • Les nouvelles taches s’insèrent en dernier dans leur file de priorité associée.
+        À partir d’une liste de tâches à exécuter, vous devez proposer un planning quantum par quantum valide avec les règles
+        données au dessus.
+    Chaque tache à un nom, un niveau de priorité, une durée et un moment où elle est crée (elle est crée quand l’opérateur
+    appuie sur la touche entrée de son terminal...).
+
+
+
+Listes des taches:
+    Nom de la tache Priorité durée création
+    iA : init_A     fort       2      0
+    cA : corps_A    normal     3      0
+    dA : display_A  faible     1      0
+    iB : init_B     fort       2      3
+    cB : corps_B    normal     4      3
+    dB : display_B  faible     1      3
+    iC : init_C     fort       4      9
+    cC : corps_C    normal     1      9
+    dC : display_C  faible     1      9
+
+    Proposez un planning valide pour exécuter ces tâches à partir du quantum de temps numéro 0.
+    Donner les dates (des numéros de quantums) de fin d’exécution des trois processus de type display_X.
+    Comme suggestion de présentation, vous pouvez proposer une flèche du temps,
+    qui commence au quantum zéro et qui indique, quantum par quantum, qui est exécuté.
+
+
+La réponse:
+    Je ne sais pas comment le faire, si vous avez une idée, je suis ouvert à votre proposition.
+
+
+
+
+
+
+Exercice 7 : Traçage d’exécution (4 points)
+    Prenons le programme suivant :
+
+    #include <stdio.h>
+
+    int factorial(int n){
+        if (n <= 1)
+            return 1;
+        return n*factorial(n-1);
+    }
+
+    int main(int argc, char* argv[]){
+        printf("Factorielle(5) vaut : %d\n", factorial(5));
+        return 0;
+    }
+
+    Si on regarde la pile d’appels (appels des fonctions avec leurs arguments),
+    pour l’exécution de ce programme au dessus, on peut produire la trace suivante :
+
+
+main
+  factorial 5
+    factorial 4
+      factorial 2
+        factorial 1
+
+    Il y a eu 5 appels de fonction et on remarque que le main a appelé factorial(5) qui a appelé factorial(4), etc...
+    L’indentation donne une idée de qui appelle qui.
+
+
+    À partir de l’exemple donné au dessus,
+    afficher la trace donnant l’évolution de la pile d’appel du programme suivant :
+
+    #include <stdio.h>
+    int binomial(int n, int p){
+        if ((n == 0) || (p == 0) || (n == p))
+            return 1;
+        return binomial(n-1, p) + binomial(n-1,p-1);
+    }
+    int main(int argc, char* argv[]){
+        printf("Binomial de 5, 3 vaut : %d\n", binomial(5, 3));
+        return 0;
+    }
+
+La réponse:
+
+main
+  binomial(5, 3)
+    binomial(4, 3)
+      binomial(3, 3)
+      binomial(3, 2)
+        binomial(2, 2)
+        binomial(2, 1)
+          binomial(1, 1)
+          binomial(1, 0)
+  binomial(4, 2)
+    binomial(3, 2)
+      binomial(2, 2)
+      binomial(2, 1)
+        binomial(1, 1)
+        binomial(1, 0)
+    binomial(3, 1)
+      binomial(2, 1)
+        binomial(1, 1)
+        binomial(1, 0)
+      binomial(2, 0)
 
