@@ -18,16 +18,17 @@
 
 Exercice 1 : Ouais, j’ai lu le cours 10 minutes… (4 points)
     1) Avec les processeurs actuels, de plus en plus multi-coeurs,
-        les ordonnanceurs de taches sont-ils devenus plus ou moins importants qu’avant ?
+        les ordonnanceurs de taches sont-ils devenus plus ou moins importants qu’avant?
 
-    2) Pourquoi les CPU modernes gèrent-ils un aussi grand nombre d’interruptions ? 
-        À quoi servent ces interruptions ?
+    2) Pourquoi les CPU modernes gèrent-ils un aussi grand nombre d’interruptions? 
+        À quoi servent ces interruptions?
 
-    3) Dans le système de fichiers Unix, peut-on créer une infinité de fichiers vides (de taille zéro octet) ? Comment ?
+    3) Dans le système de fichiers Unix, peut-on créer une infinité de fichiers vides (de taille zéro octet)?
+        Comment?
 
     4) Le cours (et plusieurs TP) montrent que les pipes font que
         les programmes Unix enchaînés sont exécutés en parallèle.
-        Pourquoi les experts en algorithmique disent-ils que la commande sort casse le parallélisme ?
+        Pourquoi les experts en algorithmique disent-ils que la commande sort casse le parallélisme?
 
     Note : Seules les justifications sont notées.
     Ainsi le fait de réponse oui, non, vrai ou faux rapporte systématiquement zéro point à la question.
@@ -37,7 +38,31 @@ Exercice 1 : Ouais, j’ai lu le cours 10 minutes… (4 points)
 
 
 Les réponses:
-    TO DO
+    A vérifier 
+
+    1) Les ordonnanceurs de tâches sont devenus plus importants avec les processeurs multi-cœurs
+        car ils doivent gérer de manière efficace et équilibrée l'exécution de multiples threads d'exécution
+        sur plusieurs cœurs pour maximiser les performances du système.
+
+    2) Les interruptions jouent un rôle crucial dans le fonctionnement des CPU modernes en permettant 
+        la gestion des périphériques,
+        le multitâche,
+        la gestion des exceptions et
+        la communication interprocesseur.
+        Elles permettent aux processeurs de répondre de manière efficace et rapide aux événements et
+        aux situations exceptionnelles qui se produisent pendant l'exécution d'un programme.
+
+    3) Dans un système de fichiers Unix, il n'est pas possible de créer une infinité de fichiers vides,
+        car les ressources d'un système informatique sont limitées.
+        Cependant, vous pouvez créer un très grand nombre de fichiers vides jusqu'à ce que
+        vous atteigniez les limites pratiques imposées par le système de fichiers ou par le système d'exploitation.
+
+    4) Bien que les pipes permettent généralement l'exécution en parallèle de programmes Unix en chaîne,
+        l'utilisation de la commande sort peut rompre ce parallélisme
+        en raison de la nécessité d'attendre que toutes les données soient collectées
+        avant de commencer le tri, ainsi que du coût élevé en termes de temps de calcul et
+        de mémoire associé au tri des données.
+
 
 
 
@@ -118,7 +143,6 @@ Chaque ligne se découpe ainsi :
     fichier : Le chemin absolu du fichier dans ce disque dur virtuel partagé
 
 
-
 1) Proposez une commande Unix qui compte le nombre d’effacements de fichiers dans le dépôt.
 
 2) Proposez une commande Unix qui détermine combien de fichiers
@@ -154,9 +178,22 @@ Chaque ligne se découpe ainsi :
 
 
 
-
 Les réponses:
-    TO DO
+    A vérifier tous les commandes
+    1) cat Ygg_log | grep -e "D" | wc -l
+
+    2) cat Ygg_log | grep -e "Dominique Revuz" | cut -d '|' -f 3 | grep -e "A" | wc -l
+
+    3) cut -d '|' -f 2 Ygg_log | sort | uniq -c | sort -nr
+
+    4) grep '|David DOYEN|' Ygg_log | cut -d '|' -f 4 | sort -u | wc -l
+
+    5) grep '|A|' Ygg_log | cut -d '|' -f 2 | sort | uniq -c | sort -nr | head -5
+
+    6) awk -F\| '{print $2 "|" $4}' Ygg_log | sort -u | cut -d\| -f1 | uniq -c | sort -nr
+
+
+
 
 
 
