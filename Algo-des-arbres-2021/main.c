@@ -430,19 +430,13 @@ int plusGrand(Foret f){
 }
 
 
-
-
-
-
-
-
+/*
+    QCM assez simple et similaire à ce qu'on a fait
+    Je crois que vous êtes capable de le faire vous même
+*/
 
 
 int main(void){
     return 0;
 }
-
-
-
-
 
