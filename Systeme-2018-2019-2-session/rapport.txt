@@ -1,15 +1,118 @@
+                                        L2 informatique - Université Paris Est à Marne-La-Vallée
+                                 Architecture des systèmes informatiques : Examen seconde session 2018-2019
+        Durée de l’épreuve : 2 heures
+        Les notes de cours, de TD et de TP ne sont pas autorisées. Les ordinateurs, calculatrices ainsi que les téléphones
+        sont interdits et éteints durant l’épreuve. Il est possible à tout moment d’admettre la réponse (algorithme, fonction,
+        programme, etc.) à une question non traitée à condition de le préciser explicitement. Il est très fortement préconisé de
+        lire exhaustivement l’énoncé avant de commencer à répondre aux exercices.
+
+        Les justifications et explications sont toujours plus importantes que les résultats attendus aux questions. Ainsi, la qualité
+        de la rédaction de vos réponses aura un impact très important sur la notation. Fournir un résultat correct sans aucune
+        explication ne donne aucun point. Fournir une explication valide avec un résultat erroné peut donner un grand nombre de
+        points sur les questions.
+        Le barème est juste donné à titre indicatif, il donne un indice sur la longueur et la difficulté des exercices.
 
 
 
 
 
+Exercice 1 : Ouais, j’ai lu le cours 10 minutes… (4 points)
+
+1) Combien il y a-t-il de transistors dans un ordinateur moderne ?
+    Donnez un ordre de grandeur et décrivez les endroits de la machine où ces derniers sont situés.
+
+2) Qu’est ce qu’un processus ? Quelles informations peut-on trouver dans un processus ?
+
+3) Comment sont organisés les droits sur les fichiers en Unix ?
+
+4) Quels sont les objectifs de l’ordonnanceur du système Unix ?
+
+
+Les réponses:
+    1) Un ordinateur moderne peut contenir des millions voire des milliards de transistors.
+        Les transistors sont présents dans toutes les parties critiques de l'ordinateur
+        où des opérations électroniques sont effectuées.
+        Par exemple: dans le processeur (CPU),
+                     dans la mémoire vive (RAM),
+                     dans la mémoire morte (SSD) pour stocker des données de manière permanente
+
+    2)  Les processus sont une abstraction système pour modéliser 
+        et manipuler les programmes en cours d’exécution. (COURS)
+
+        Un processus est un ensemble d’octets en langage machine
+        qui représente l’état de l’exécution d’un programme.
+
+    Le PCB (Process Control Block) : une structure noyau qui rassemble :
+        - L’ID du processus (PID), l’ID du processus père (PPID) et
+            l’ID de l’utilisateur ayant lancé le processus (UID)
+        - Copies des contenus des registres (actualisés lors d’un core dump)
+        - Compteur ordinal du processus (ligne en cours exécution)
+        - Pointeur de pile (prochain emplacement disponible sur la pile)
+        - L’espace d’adressage du processus (visible par utilisateur et programmeur)
+        - Liste des descripteurs de fichiers (flux ouverts)
+        - Gestion des signaux
+
+    3) les droits sur les fichiers sont organisés en utilisant un système de permissions basé
+        sur trois catégories d'utilisateurs : le propriétaire du fichier, 
+                                              le groupe auquel le fichier appartient,
+                                              les autres utilisateurs 
+        Lecture (r) : permet de lire le contenu du fichier.
+        Écriture (w) : permet de modifier ou d'écrire dans le fichier.
+        Exécution (x) : permet d'exécuter le fichier s'il s'agit d'un programme exécutable
+
+    4) L'objectif principal de l'ordonnanceur du système Unix vise
+        à optimiser l'utilisation des ressources du processeur,
+        à garantir la réactivité du système,
+        à équilibrer la charge de travail et
+        à éviter les situations de blocage,
+        le tout dans le but d'offrir une expérience utilisateur fluide et performante
+
+
+
+
+Exercice 2 : Lire dans les pensées (4 points)
+    Pour chacune des commandes qui suivent, tentez de déterminer les intentions précises de son auteur.
+    Il s’agit ici de deviner quelle information l’auteur de la commande veut obtenir.
+    Il est inutile de décrire et décomposer la commande, il faut en deviner la finalité.
+
+1) ps -ef | grep "root" | wc -l
+
+2) find / -name "stdio.h" 2> /dev/null
+
+3) ls -al | grep "-rwxrwxrwx"
+
+4) find -name ".py" | xargs chmod +x
+
+
+Les réponses:
+
+1) le nombre total de processus en cours d'exécution sur le système qui ont le nom d'utilisateur "root".
+
+2) trouver le chemin absolu de tous les fichiers nommés "stdio.h" à partir de la racine
+    du système de fichiers, en supprimant les messages d'erreur liés aux permissions insuffisantes.
+
+3) renvoie tous les fichiers qui ont toute la permission
+    d'écrire, de lire, de l'exécuter pour tout le monde (777 - "-rwxrwxrwx").
+
+4) trouver tous les fichiers ayant l'extension ".py" dans le répertoire actuel
+    et ses sous-répertoires, puis leur accorder le droit d'exécution pour tous les utilisateurs.
 
 
 
 
 
+Exercice 3 : changements de base (4 points)
+    Traduire les chiffres suivants de la base 10 vers la base 7 :
+    66, 48, 114, 400
+    Les calculs étant plus importants que les résultats.
+    Veuillez faire apparaître toutes les étapes de calcul vous permettant d’opérer le changement de base.
 
 
+Les réponses:   (voir le CM2)
+    66(10) = 123(7)
+    48(10) = 66(7)
+    114(10) = 222(7)
+    400(10) = 1111(7)
 
 
 
@@ -24,6 +127,7 @@ Exercice 4 : Table de vérité (4 points)
     0 | 0 | 1 | 1
     etc...
 
+La réponse:
 #include <stdio.h>
 
 void fonction_C(int a, int b, int c){
@@ -38,6 +142,7 @@ void fonction_C(int a, int b, int c){
         }
     }
 }
+
 
 
 
@@ -91,3 +196,35 @@ Les réponses:
 (1, 0)
 (0, 0)
 18
+
+
+
+
+
+Exercice 6 : Décodage (4 points)
+    Le flux suivant binaire vient d’être intercepté.
+    Il semblerait que ce flux soit en fait des caractères en code ascii. Tentez de décoder ce flux.
+    Voici un morceau de la table ascii pour vous aider.
+
+    a  b  c   d   e   f   g   h   i   j   k   l   m
+    97 98 99 100 101 102 103 104 105 106 107 108 109
+     n   o   p   q   r   s   t   u   v   w   x   y   z
+    110 111 112 113 114 115 116 117 118 119 120 121 122
+
+
+    N'oubliez pas que:
+    a (ASCII) == 0110 0001 (binaire)
+    b (ASCII) == 0110 0010 (binaire)
+    ...
+    z (ASCII) == 0111 1010 (binaire)
+
+    Flux intercepté:
+    0110 0111   0111 0000   0111 0100
+    0110 0011   0110 1011   0110 1011
+    0110 0001   0111 0010
+
+        g           p           t
+        c           k           k
+        a           r
+
+    Donc le message décodé est "gptckkar"
