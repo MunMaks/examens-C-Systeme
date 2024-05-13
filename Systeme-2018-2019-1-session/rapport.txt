@@ -66,7 +66,8 @@ Bonus : Devinez les intentions de l’auteur de la commande et précisez s’il 
 
 2) find my_code -name "*.py" | xargs cat | grep "^[ ]*for"
 
-3) On a un fichier personnes.csv dont les lignes ont la structure suivante : identifiant numérique, nom, prénom, age, mail.
+3) On a un fichier personnes.csv dont les lignes ont la structure suivante :
+    identifiant numérique, nom, prénom, age, mail.
     La commande est alors la suivante : cat personnes.csv | grep "Martin" | wc -l
 
 4) cat personnes.csv | cut -f 3 -d ',' | uniq | sort | wc -l
@@ -75,35 +76,25 @@ Bonus : Devinez les intentions de l’auteur de la commande et précisez s’il 
 
 Les réponses:
 1) $ ls -al | grep "^d" | wc -l
-
-première commande: affiche tous les fichiers et répertoires avec les détails et renvoie sa sorite vers la sortie standard
-deuxième commande: prend la sortie standard de la commande précedente comme l'entrée standard
-                   et effectue le triage en cherchant les fichiers et répertoires qui commencent pas `d`
-troisième commande: prend la sortie standard de la commande précedente comme l'entrée standard
-                    et effectue compte le nombre de lignes renvoyé par la deuxième commande
+    Affichage le nombre de fichiers qui commancent par `d` dans le répertoire courant
 
 
 2) $ find my_code -name "*.py" | xargs cat | grep "^[ ]*for"
 
-    `find my_code -name "*.py"` recherche tous les fichiers avec l'extension ".py" dans le répertoire "my_code".
-    Ensuite, `xargs cat` lit le contenu de chaque fichier trouvé, et
-    `grep "^[ ]*for"` filtre les lignes commençant par "for", en tenant compte des espaces éventuels avant "for".
+    Recherche tous les fichiers Python dans le répertoire my_code et ses sous-répertoires,
+    affiche le contenu de chaque fichier, puis recherche toutes les lignes de code
+    contenant des boucles for dans ces fichiers, en affichant le résultat final
 
 
 3) cat personnes.csv | grep "Martin" | wc -l
 
-    `cat personnes.csv` affiche le contenu du fichier "personnes.csv".
-    Ensuite, `grep "Martin"` filtre les lignes contenant le nom "Martin".
-    Enfin, `wc -l` compte le nombre de ces lignes.
+    Compter le nombre de lignes qui contenant le prénom "Martin".
 
 
+Ici je suis pas sûr...
 4) cat personnes.csv | cut -f 3 -d ',' | uniq | sort | wc -l
 
-    `cat personnes.csv` affiche le contenu du fichier "personnes.csv".
-    Ensuite, `cut -f 3 -d ','` extrait la troisième colonne (les prénoms) en utilisant "," comme délimiteur.
-    Puis, `uniq` supprime les lignes en double (prénoms répétés).
-    Enfin, `sort` trie les prénoms
-    et `wc -l` compte le nombre total de prénoms uniques.
+    Afficher le nombre de prénoms uniques présents dans le fichier personnes.csv
 
 
 
@@ -135,6 +126,7 @@ Les réponses:
     Donc on aura:
        33        AA        3F        D4        99
     00110011  10101010  00111111  11010100  10011001
+
 
 
 
