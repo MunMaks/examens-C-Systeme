@@ -41,11 +41,13 @@ typedef struct noeud{
 
 int nombreFilsUniques(Arbre a){
     if (!a) { return 0; }                   /* la racine est NULL */
-    if (!a->fg && !a->fd) { return 0; }     /* deux enfants sont NULL */
-    if (a->fg && a->fd) { return 0; }       /* noeud a deux enfants */
 
     int left = nombreFilsUniques(a->fg);
     int right = nombreFilsUniques(a->fd);
+  
+    if (!a->fg && !a->fd) { return 0; }     /* deux enfants sont NULL */
+    if (a->fg && a->fd) { return 0; }       /* noeud a deux enfants */
+
 
     return left + right + 1;                /* noeud a un unique fils */
 }
