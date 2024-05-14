@@ -114,7 +114,7 @@ int nombreMots(ArbreT a){
     int mid = nombreMots(a->fils);
     int right = nombreMots(a->frd);
     if (a->lettre == '\0'){     /* if (!a->lettre) */
-        return left + mid + right + 1;
+        return 1;
     }
     return left + mid + right;
 }

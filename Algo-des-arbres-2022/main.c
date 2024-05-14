@@ -8,6 +8,10 @@
     • On pourra écrire des fonctions annexes, si l'utilisation de paramètres supplémentaires est nécessaire.
 */
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+
 
 /*
 Exercice 1. Arbres binaires. (5 points)
@@ -95,7 +99,7 @@ Noeud *alloueNoeud(int n){
 
 Arbre copieArbre(Arbre a){
     if (!a) return NULL;
-    new_arbre = alloueNoeud(a->val);
+    Noeud *new_arbre = alloueNoeud(a->val);
     new_arbre->fg = copieArbre(a->fg);
     new_arbre->fd = copieArbre(a->fd);
     return new_arbre;
@@ -123,50 +127,179 @@ Exercice 2. Insertions et suppressions dans différents types d’arbres (6 poin
 
 
 
+/*
+Exercice 3. Union-Find (3 points)
+    Soit l’ensemble S = {0, 1, 2, 3, 4}.
+    En utilisant la fusion par rang et la compression des chemins, dessinez la forêt d’ensembles
+        disjoints représentant les ensembles obtenus après chacune des opérations suivantes :
+            Union(0,1)
+            Union(1,3)
+            Union(4,2)
+            Union(3,2)
+            Union(2,4)
+
+    Pour chaque représentation, on précisera la valeur du rang de chaque arbre et
+        on donnera sa représentation sous forme de tableau des pères.
+
+    Remarque : Lors d’une fusion, en cas d’égalité de rang, la nouvelle racine sera choisie comme
+                le plus petit des représentants des éléments fusionnés.
+
+
+
+    indices:    0   1   2   3   4
+      peres:    0   1   2   3   4
+
+    Après Union(0, 1):
+
+    indices:    0   1   2   3   4
+      peres:    0   0   2   3   4
+
+    Après Union(1, 3):
+
+    indices:    0   1   2   3   4
+      peres:    0   0   2   0   4
+
+    Après Union(4, 2):
+
+    indices:    0   1   2   3   4
+      peres:    0   0   2   0   2
+
+    Après Union(3, 2):
+
+    indices:    0   1   2   3   4
+      peres:    0   0   0   0   2
+
+    Après Union(2, 4):
+
+    indices:    0   1   2   3   4
+      peres:    0   0   0   0   2
+
+*/
 
 
 
 
 
 
+/*
+Exercice 4. Représentation d’un arbre "fils gauche, frère droit" (4 points)
+    On représente un arbre lexicographique à l’aide d’un arbre binaire "fils gauche, frère droit".
+    La liste des frères est ordonnée.
+*/
+
+typedef struct noeudL {
+    char lettre;
+    struct noeudL *fg,*frd;
+} NoeudL, * ArbreL;
+
+
+/*
+Figure 1 (page 3)
+Donner sa représentation "fils gauche, frère droit".
+
+              a
+             / 
+            b    ->     f    ->    j
+          /            /          /
+        c -> d -> e   g          k
+                     /
+                    h -> i
+
+
+*/
+
+
+/*
+Insérer les mots suivants dans un arbre lexicographique initialement vide.
+    mais, on, ile, onde, ma, ils, ilot.
+
+        m
+        |
+        a
+        |
+        i
+        |
+        s
+        |
+       '\0'
+
+    TO DO
+*/
 
 
 
 
 
+/*
+    Écrire une fonction int nombreMots(ArbreL a) qui renvoie le nombre de mots mémorisés dans l’arbre a.
+*/
+
+
+int nombreMots(ArbreL a){
+    if (!a) return 0;
+    int left = nombreMots(a->fg);
+    int right = nombreMots(a->frd);
+    if (a->lettre == '\0'){
+        return 1;
+    }
+    return left + right;
+}
 
 
 
+/*
+    Écrire une fonction void affichePrefixe(ArbreL A, char *pref) qui affiche
+        les mots mémorisés par l’arbre a qui ont pour préfixe pref.
+    Par exemple, avec l’arbre A construit à la question 2., l’appel affichePrefixe(A,"m")
+        entraine l’affichage :
+            MA
+            MAIS
+    Alors que l’appel affichePrefixe(A,"n") entrainera l’affichage :
+    Pas de mots trouvé !
+*/
 
 
 
+/*
+    Exercice 5. Tas (2 points)
+    Dans cet exercice, on considère un tas binaire maximum (i.e. un noeud est plus grand que ses enfants).
+    Chacune des réponses aux questions suivantes devra être justifiée, i.e. le résultat affirmé devra être démontré.
+    1. Quelle est la complexité de l’ajout d’un élément dans un tas binaire ?
+    2. Quelle est la complexité de l’extraction de l’élément maximum du tas ?
+
+    
+    1) l'ajout s'effectue en O(hauteur) ou dans ce cas c'est O(log2(N)), avec N - nombre de noeuds
+
+    2) la suppression s'effectue en 0(1), car il faut soustraire la racine
+*/
+
+
+/*
+    Exercice 6. AVL (1,5 points)
+    1. Quel est le nombre maximum de noeuds d’un arbre AVL de hauteur 6 ?
+    2. Quel est le nombre minimum de noeuds d’un arbre AVL de hauteur 6 ?
+    Justifiez vos réponses
+
+
+    1) 2^7 - 1 (c'est un arbre de hauteur 6 parfait, quand chaque noeud a 2 enfants)
+    autrement dit c'est:
+    2^0 + 2^1 + ... + 2^6 = 1 + 2 + ... + 64
+
+
+    2) F_6 = F_5 + F_4 (Fibonacci autrement dit, car il faut le minimum de noeud pour chaque hauteur)
+
+    hauteur 0: 1 noeuds
+    hauteur 1: 2 noeuds
+    hauteur 2: 3 noeuds
+    hauteur 3: 5 noeuds
+    hauteur 4: 8 noeuds
+    hauteur 5: 13 noeuds
+    hauteur 6: 21 noeuds
+
+*/
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+int main(void){
+    return 0;
+}
