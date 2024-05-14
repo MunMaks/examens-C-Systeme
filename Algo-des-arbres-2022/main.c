@@ -258,6 +258,11 @@ int nombreMots(ArbreL a){
     Pas de mots trouvé !
 */
 
+void affichePrefixe(ArbreL A, char *pref){
+    ;   /* TO DO */
+}
+
+
 
 
 /*
@@ -267,10 +272,9 @@ int nombreMots(ArbreL a){
     1. Quelle est la complexité de l’ajout d’un élément dans un tas binaire ?
     2. Quelle est la complexité de l’extraction de l’élément maximum du tas ?
 
-    
+    Les réponses:
     1) l'ajout s'effectue en O(hauteur) ou dans ce cas c'est O(log2(N)), avec N - nombre de noeuds
-
-    2) la suppression s'effectue en 0(1), car il faut soustraire la racine
+    2) la suppression s'effectue en 0(1), car il faut soustraire directement la racine
 */
 
 
@@ -281,9 +285,22 @@ int nombreMots(ArbreL a){
     Justifiez vos réponses
 
 
+    Les réponses:
     1) 2^7 - 1 (c'est un arbre de hauteur 6 parfait, quand chaque noeud a 2 enfants)
     autrement dit c'est:
     2^0 + 2^1 + ... + 2^6 = 1 + 2 + ... + 64
+                                        X               1       hauteur: 0
+                                      /   \
+                                     X     X            2       hauteur: 1
+                                    / \   / \
+                                ................        4       hauteur: 2
+                                ................        8       hauteur: 3
+                                ................        16      hauteur: 4
+                                ................        32      hauteur: 5
+                                ................        64      hauteur: 6
+
+    En faisant la somme on aura 127 noeuds donc c'est bien 2^7 - 1
+
 
 
     2) F_6 = F_5 + F_4 (Fibonacci autrement dit, car il faut le minimum de noeud pour chaque hauteur)
@@ -295,7 +312,6 @@ int nombreMots(ArbreL a){
     hauteur 4: 8 noeuds
     hauteur 5: 13 noeuds
     hauteur 6: 21 noeuds
-
 */
 
 
