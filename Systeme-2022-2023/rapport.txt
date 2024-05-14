@@ -1,0 +1,25 @@
+                                        L2 informatique - Université Gustave Eiffel
+                                 Architecture des systèmes informatiques : Examen prémière session 2022-2023
+        Durée de l’épreuve : 2 heures
+        Les notes de cours, de TD et de TP ne sont pas autorisées. Les ordinateurs, calculatrices ainsi que les téléphones
+        sont interdits et éteints durant l’épreuve. Il est possible à tout moment d’admettre la réponse (algorithme, fonction,
+        programme, etc.) à une question non traitée à condition de le préciser explicitement. Il est très fortement préconisé de
+        lire exhaustivement l’énoncé avant de commencer à répondre aux exercices.
+
+        Les justifications et explications sont toujours plus importantes que les résultats attendus aux questions. Ainsi, la qualité
+        de la rédaction de vos réponses aura un impact très important sur la notation. Fournir un résultat correct sans aucune
+        explication ne donne aucun point. Fournir une explication valide avec un résultat erroné peut donner un grand nombre de
+        points sur les questions.
+        Le barème est juste donné à titre indicatif, il donne un indice sur la longueur et la difficulté des exercices.
+
+
+
+
+
+
+
+
+TO DO
+
+
+
