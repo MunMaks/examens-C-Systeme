@@ -123,6 +123,7 @@ Exercice 2. Insertions et suppressions dans différents types d’arbres (6 poin
         l’arbre sera dessiné avant et après chaque rotation.
 */
 
+/* TO DO */
 
 
 
@@ -171,8 +172,9 @@ Exercice 3. Union-Find (3 points)
 
     Après Union(2, 4):
 
+    4 maintenant change son peres (la compression du chemin)
     indices:    0   1   2   3   4
-      peres:    0   0   0   0   2
+      peres:    0   0   0   0   0
 
 */
 
