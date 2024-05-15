@@ -77,7 +77,6 @@ int estTournoi(Arbre a){
     normalement c'est la fonction `hauteur()`
     mais cette fonction prend le minimum entre les hauteurs
 */
-
 int plusCourte(Arbre a){
     if (!a) return -1;
     int left = plusCourte(a->fg);

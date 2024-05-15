@@ -213,17 +213,17 @@ Donner sa représentation "fils gauche, frère droit".
 Insérer les mots suivants dans un arbre lexicographique initialement vide.
     mais, on, ile, onde, ma, ils, ilot.
 
-        m
-        |
-        a
-        |
-        i
-        |
-        s
-        |
-       '\0'
+La réponse: (vous pouvez comparer votre résultat avec ça)
 
-    TO DO
+     i------------->m---------->o
+     |              |           |
+     l              a           n
+     |              |           |
+     e -> o -> s   '\0'-> i    '\0'->d
+     |    |    |          |           |
+    '\0'  t   '\0'        s           e
+          |               |           |
+         '\0             '\0'        '\0'
 */
 
 
@@ -304,14 +304,23 @@ void affichePrefixe(ArbreL A, char *pref){
 
 
     2) F_6 = F_5 + F_4 (Fibonacci autrement dit, car il faut le minimum de noeud pour chaque hauteur)
+    Avec la formule suivante:
+    hauteur = -1, donc il faut 0 noeuds
+    hauteur = 0, donc il faut 1 noeud
 
-    hauteur 0: 1 noeuds
-    hauteur 1: 2 noeuds
-    hauteur 2: 3 noeuds
-    hauteur 3: 5 noeuds
-    hauteur 4: 8 noeuds
-    hauteur 5: 13 noeuds
-    hauteur 6: 21 noeuds
+    hauteur = n, donc il faut 1 + hauteur_min(n-2) + hauteur_min(n-1)
+
+    J'écris directement la réponse:
+        hauteur -1: 0 noeuds
+        hauteur 0: 1 noeuds
+        hauteur 1: 2 noeuds
+        hauteur 2: 4 noeuds
+        hauteur 3: 7 noeuds
+        hauteur 4: 12 noeuds
+        hauteur 5: 20 noeuds
+        hauteur 6: 33 noeuds
+        hauteur 7: 54 noeuds
+        ...
 */
 
 
