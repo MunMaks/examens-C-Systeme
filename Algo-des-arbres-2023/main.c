@@ -61,6 +61,7 @@ int complet(Arbre a){
     Exercice 2. QuadTree.
 */
 
+#define MAX 512
 
 typedef struct Qneu{
     unsigned char couleur;
@@ -68,14 +69,23 @@ typedef struct Qneu{
 } Qnoeud, *Qarbre;
 
 /*
-    Qnoeud *alloue_noeud(unsigned char);
-    int est_monochrome(unsigned char image[][MAX], int x, int y, int taille);
-    void colorie(unsigned char image[][MAX], int x, int y, int taille, unsigned char couleur);
-
     void arbre_2_img(Qarbre a, unsigned char[][MAX]);
     int img_2_arbre(unsigned char image[][MAX], Qarbre *a);
 */
 
+/* On suppose que l'on dispose des fonctions suivantes */
+
+// renvoie l'adresse d'un Qnoeud de couleur `c` dont les quatre enfants sont vides
+Qnoeud *alloue_noeud(unsigned char);
+
+// renvoie 1, si le carré de côté `taille`
+// dont le coin supérieur gauche a pour coordonées (x, y) est unifforme en couleur
+// i.e. est formé de pixels de la même couleur, et 0 sinon
+int est_monochrome(unsigned char image[][MAX], int x, int y, int taille);
+
+// qui remplit avec couleur les cases du tableau correspondant au carré de côté `taille`
+// dont le coin supérieur gauche a pour coordonées (x,y)
+void colorie(unsigned char image[][MAX], int x, int y, int taille, unsigned char couleur);
 
 
 
