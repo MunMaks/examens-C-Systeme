@@ -91,16 +91,48 @@ typedef struct Qneu{
 /* On suppose que l'on dispose des fonctions suivantes */
 
 // renvoie l'adresse d'un Qnoeud de couleur `c` dont les quatre enfants sont vides
-Qnoeud *alloue_noeud(unsigned char);
+Qnoeud *alloue_noeud(unsigned char c){
+
+    Qnoeud *new_noeud = malloc(sizeof(*new_noeud));
+    if (!nouveauNoeud) {
+        fprintf(stderr, "Pas de memoire\n");
+        return NULL;
+    }
+
+    nouveauNoeud->couleur = c;
+
+    for (int i = 0; i < 4; i++)
+        nouveauNoeud->fils[i] = NULL;
+
+    return nouveauNoeud;
+}
+
 
 // renvoie 1, si le carré de côté `taille`
 // dont le coin supérieur gauche a pour coordonées (x, y) est unifforme en couleur
 // i.e. est formé de pixels de la même couleur, et 0 sinon
-int est_monochrome(unsigned char image[][MAX], int x, int y, int taille);
+int est_monochrome(unsigned char image[][MAX], int x, int y, int taille) {
+    unsigned char couleur_reference = image[x][y];
+
+    for (int i = 0; i < taille; ++i) {
+        for (int j = 0; j < taille; ++j) {
+            if (image[x + i][y + j] != couleur_reference) {
+                return 0;
+            }
+        }
+    }
+
+    return 1;
+}
+
 
 // qui remplit avec couleur les cases du tableau correspondant au carré de côté `taille`
 // dont le coin supérieur gauche a pour coordonées (x,y)
-void colorie(unsigned char image[][MAX], int x, int y, int taille, unsigned char couleur);
+void colorie(unsigned char image[][MAX], int x, int y, int taille, unsigned char couleur){
+    for (int i = 0; i < taille; ++i)
+        for (int j = 0; j < taille; ++j)
+            image[x + i][y + j] = couleur;
+}
 
 
 
@@ -118,13 +150,75 @@ void colorie(unsigned char image[][MAX], int x, int y, int taille, unsigned char
     // L'entier renvoyé indiquera si l'arbre a bien était construit
 */
 
-/* TO DO */
-void arbre_2_img(Qarbre a, unsigned char[][MAX]){
-    return;
+
+
+/*
+    à vérifier plus tard
+*/
+void remplir_image(Qnoeud *noeud, unsigned char image[][MAX], int x, int y, int taille) {
+    if (!noeud) return; // rien a faire
+
+    // si le noeud n'a pas d'enfant, remplir le carré avec la couleur
+    if ( !noeud->fils[0] && !noeud->fils[1] && !noeud->fils[2] && !noeud->fils[3]) {
+        colorie(image, x, y, taille, noeud->couleur);
+    }
+    else {
+        int demiTaille = taille / 2;
+        remplir_image(noeud->fils[0], image, x, y, demiTaille);                             // haut-gauche
+        remplir_image(noeud->fils[1], image, x, y + demiTaille, demiTaille);                // haut-droite
+        remplir_image(noeud->fils[2], image, x + demiTaille, y, demiTaille);                // bas-gauche
+        remplir_image(noeud->fils[3], image, x + demiTaille, y + demiTaille, demiTaille);   // bas-droite
+    }
 }
 
+
+void arbre_2_img(Qarbre a, unsigned char[][MAX]){
+    if (!a) return;
+    remplir_image(a, image, 0, 0, MAX);
+}
+
+
+
+
+
+
+
+
+
+
+/*
+    à vérifier plus tard
+*/
+int img_2_arbre_helper(unsigned char image[][MAX], int x, int y, int taille, Qarbre *noeud) {
+
+    if (est_monochrome(image, x, y, taille)) {
+        unsigned char couleur = image[x][y];
+        *noeud = alloue_noeud(couleur);
+        if (!*noeud) {
+            return 0;
+        }
+        return 1;
+    } else {
+        if (!(*noeud = alloue_noeud(0))) {
+            fprintf(stderr, "Pas de memoire\n");
+            return 0;
+        }
+        int demiTaille = taille / 2;
+        if (!img_2_arbre_helper(image, x, y, demiTaille, &((*noeud)->fils[0])) ||
+            !img_2_arbre_helper(image, x, y + demiTaille, demiTaille, &((*noeud)->fils[1])) ||
+            !img_2_arbre_helper(image, x + demiTaille, y, demiTaille, &((*noeud)->fils[2])) ||
+            !img_2_arbre_helper(image, x + demiTaille, y + demiTaille, demiTaille, &((*noeud)->fils[3]))) {
+            return 0;
+        }
+        return 1;
+    }
+}
+
+
+
+
 int img_2_arbre(unsigned char image[][MAX], Qarbre *a){
-    return 0;
+    return img_2_arbre_helper(image, 0, 0, MAX, a);
 }
 
 
