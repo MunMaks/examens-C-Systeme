@@ -68,11 +68,6 @@ typedef struct Qneu{
     struct Qneu *fils[4];
 } Qnoeud, *Qarbre;
 
-/*
-    void arbre_2_img(Qarbre a, unsigned char[][MAX]);
-    int img_2_arbre(unsigned char image[][MAX], Qarbre *a);
-*/
-
 /* On suppose que l'on dispose des fonctions suivantes */
 
 // renvoie l'adresse d'un Qnoeud de couleur `c` dont les quatre enfants sont vides
@@ -86,6 +81,166 @@ int est_monochrome(unsigned char image[][MAX], int x, int y, int taille);
 // qui remplit avec couleur les cases du tableau correspondant au carré de côté `taille`
 // dont le coin supérieur gauche a pour coordonées (x,y)
 void colorie(unsigned char image[][MAX], int x, int y, int taille, unsigned char couleur);
+
+
+
+
+/*
+    TO DO:
+
+    void arbre_2_img(Qarbre a, unsigned char[][MAX]);
+    int img_2_arbre(unsigned char image[][MAX], Qarbre *a);
+*/
+
+
+
+/*
+    Exercice 3. Arbre binaires de recherche (3 points)
+
+    Faire en papier, 3 points gratuis
+*/
+
+
+
+
+/*
+    Exercice 4: Union-Find (3,5 points)
+
+    la table de pères:
+
+    idx: 0   1   2   3   4   5   6   7   8
+    tab: 0   0   0   4   4   3   0   2   5  
+
+On va réaliser:
+
+x = Trouver(7);
+y = Trouver(6);
+Fusion(x, y);
+
+
+1)
+Le forêt:
+
+        0           4
+      / | \         |
+     1  2  6        3
+        |           |
+        7           5
+                    |
+                    8
+
+2) Le répresentant de 6 c'est 0 et le répresentant de 7 c'est aussi 0, donc on fait rien...
+    Le forêt ne soit pas changer:
+
+        0           4
+      / | \         |
+     1  2  6        3
+        |           |
+        7           5
+                    |
+                    8
+
+
+3) Le rang avant: 2
+   Le range après: 2
+    Autrement dit, on ne fait rien
+
+        0           4
+      / | \         |
+     1  2  6        3
+        |           |
+        7           5
+                    |
+                    8
+
+4) En utilisant la compression des chemins, on obtient le résultat suivant:
+
+
+        0           4
+     / | | \        |
+    1  2 6  7       3
+                    |
+                    5
+                    |
+                    8
+
+    la table de pères finale:
+
+    idx: 0   1   2   3   4   5   6   7   8
+    tab: 0   0   0   4   4   3   0   0   5  
+
+*/
+
+
+/*
+    Exercice 5: AVL(4 points)
+
+1) L'arbre de Fibonacci F_4:
+
+              F_4
+          /         \
+        F_3         F_2
+       /   \       /   \
+      F_2  F_1    F_1  F_0
+     /  \
+   F_1  F_0
+
+
+2) L'ordre d'insertion des entiesr 1, 2, ..., 7 dans un AVL initialement vide qui
+    permet d'obtenir F_4 sans qu'une rotation soit nécessaire pour équilibrer l'arbre.
+    Justifiez la réponse.
+
+
+
+               4
+          /         \
+         2           6
+       /   \       /   \
+      1     3      5    7
+
+On doit effectuer l'insertion dans l'ordre suivant:
+    4, 2, 6, 1, 3, 5, 7
+    Pourquoi?
+    Car on fait l'ajout BFS (en largeur), donc si on fait comme ça
+    On assure que on effectue l'insertion des noeuds sans rotations
+
+*/
+
+
+
+/*
+3) Prouver que dans un certain ordre on peut inserer 1 en dernier temps:
+D'après la question précédente on obtient l'ordre suivant:
+
+    4, 6, 2, 7, 5, 3, 1
+    Vous pouvez remarquer que j'ai fait encore fois l'insertion en largeur
+    Mais de côté droite.
+
+
+4) l'ordre des d'insertion pour effectuer seulement la rotation gauche:
+    ******************
+    TO DO
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
