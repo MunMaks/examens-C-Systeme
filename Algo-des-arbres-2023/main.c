@@ -5,7 +5,7 @@
 
 
 /*
-    Exercice 1. Arbres binaires
+    Exercice 1. Arbres binaires (6 points)
 */
 
 
@@ -44,13 +44,33 @@ int deux_enfants(Arbre a){
 }
 
 
+/*
+    La fonctionne auxiliaire
+*/
+int complet_aux(Arbre a, int *hauteur){
+    if (!a) { *hauteur = -1; return 1; }
+
+    int hauteur_fg = 0, hauteur_fd = 0;
+
+    int left = complet_aux(a->fg, &hauteur_fg);
+    int right = complet_aux(a->fd, &hauteur_fd);
+
+    *hauteur = (hauteur_fg > hauteur_fd) ? (hauteur_fg + 1) : (hauteur_fd + 1);
+    return left && right && deux_enfants(a);
+}
+
+/*
+    ça fonctionne, j'ai vérifié, mais si vous voulez, vous pouvez tester
+*/
 int complet(Arbre a){
     if (!a) return 1;
-    int fg_et_fd = deux_enfants(a);
-    /* on a besoin une fonction externe qui calcule la hauteur, transmets par l'adresse */
 
-    /* à finir plus tard */
-    return 1;
+    int hauteur_fg = 0, hauteur_fd = 0;
+
+    int left = complet_aux(a->fg, hauteur_fg);
+    int right = complet_aux(a->fd, hauteur_fd);
+
+    return left && right && hauteur_fd == hauteur_fg;
 }
 
 
@@ -91,6 +111,10 @@ void colorie(unsigned char image[][MAX], int x, int y, int taille, unsigned char
     void arbre_2_img(Qarbre a, unsigned char[][MAX]);
     int img_2_arbre(unsigned char image[][MAX], Qarbre *a);
 */
+
+
+
+
 
 
 
@@ -172,6 +196,9 @@ Le forêt:
 */
 
 
+
+
+
 /*
     Exercice 5: AVL(4 points)
 
@@ -191,35 +218,54 @@ Le forêt:
     Justifiez la réponse.
 
 
-
-               4
-          /         \
-         2           6
-       /   \       /   \
-      1     3      5    7
+               5
+          /        \
+         3           6
+       /   \          \
+      2     4          7
+     /
+    1
 
 On doit effectuer l'insertion dans l'ordre suivant:
-    4, 2, 6, 1, 3, 5, 7
+    5, 3, 6, 2, 4, 7, 1
     Pourquoi?
     Car on fait l'ajout BFS (en largeur), donc si on fait comme ça
     On assure que on effectue l'insertion des noeuds sans rotations
 
-*/
 
 
-
-/*
 3) Prouver que dans un certain ordre on peut inserer 1 en dernier temps:
 D'après la question précédente on obtient l'ordre suivant:
 
-    4, 6, 2, 7, 5, 3, 1
+    5, 3, 6, 2, 4, 7, 1
     Vous pouvez remarquer que j'ai fait encore fois l'insertion en largeur
-    Mais de côté droite.
 
 
-4) l'ordre des d'insertion pour effectuer seulement la rotation gauche:
-    ******************
-    TO DO
+
+
+4) l'ordre des d'insertion pour effectuer seulement une rotation gauche:
+
+    4, 1, 6, 2, 5, 7, 3
+
+               4
+            /     \
+           1       6
+          / \     / \
+         2   3   5   7
+
+
+
+5) l'ordre des d'insertion pour effectuer seulement une rotation droite-gauche
+
+    4, 2, 5, 1, 3, 7, 6
+
+               4
+            /     \
+           2       6
+          / \     / \
+         1   3   5   7
+
+
 */
 
 
