@@ -106,14 +106,26 @@ void colorie(unsigned char image[][MAX], int x, int y, int taille, unsigned char
 
 
 /*
-    TO DO:
-
+    // reçoit un arbre quaternaire décrivant une image carrée de taille `MAX`
+    // et remplit le tableau `image` avec les couleurs correspondantes
     void arbre_2_img(Qarbre a, unsigned char[][MAX]);
+
+
+    // reçoit une image et construit un arbre quaternaire la représentant.
     int img_2_arbre(unsigned char image[][MAX], Qarbre *a);
+
+    // L'arbre reçu sera supposé vide au premier appel.
+    // L'entier renvoyé indiquera si l'arbre a bien était construit
 */
 
+/* TO DO */
+void arbre_2_img(Qarbre a, unsigned char[][MAX]){
+    return;
+}
 
-
+int img_2_arbre(unsigned char image[][MAX], Qarbre *a){
+    return 0;
+}
 
 
 
