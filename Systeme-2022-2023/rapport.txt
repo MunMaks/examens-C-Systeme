@@ -30,7 +30,50 @@
 */
 
 Les réponses:
-    TO DO
+    1) opérations arithmétiques: addition, soustraction, multiplication, division
+        opérations logiques: OR, AND, XOR, NOT
+        opérations de décalage: décalage à gauche et décalage à droite.
+
+    2)  Numéro d'inode : ID unique,
+        Type de fichier: un fichier, un répertoire, un lien symbolique, ...,
+        Permissions: Les droits d'accès (lecture, écriture, exécution),
+        Nombre de liens,
+        UID: ID de l'utilisateur propriétaire,
+        GID: ID du groupe propriétaire,
+        Taille du fichier: En octets,
+        Horodatages:
+            Date de dernière modification (`mtime`),
+            Date de dernier accès (`atime`),
+            Date de dernière modification de l'inode (`ctime`).
+
+    3) Dans le disque dur (HDD) ou le disque SSD.
+        - Par rapport aux d'autres types de mémoire, SSD et HDD ont la capacité plus grande.
+        - Les données sont conservées même lorsque l'ordinateur est éteint (contrairement à RAM).
+        - Les disques SSD sont plus rapides que disque dur (HDD).
+        - les SSD sont généralement plus résistants aux chocs et aux vibrations par rapport aux HDD
+        - Les SSD offrent de meilleures performances en termes d'accès aléatoire par rapport aux HDD
+
+    4)  Valeur de nice:
+        - Chaque processus a une valeur de "nice" (gentillesse) qui varie
+            de -20 (haute priorité) à 19 (basse priorité).
+        - La valeur par défaut est 0.
+        - Un utilisateur régulier peut augmenter la valeur de nice (baisser la priorité)
+            mais ne peut pas la diminuer (augmenter la priorité) sans privilèges administratifs.
+
+        L'ordonnanceur:
+            - Les processus avec des valeurs de nice plus faibles (plus haute priorité) sont programmés
+                pour s'exécuter plus souvent que ceux avec des valeurs plus élevées (plus basse priorité).
+
+        Priorité dynamique:
+            - Le noyau ajuste également dynamiquement les priorités des processus en cours d'exécution.
+                Par exemple, un processus qui a utilisé beaucoup de temps CPU
+                peut voir sa priorité réduite temporairement pour éviter qu'il ne monopolise le CPU.
+
+        Priorités temps réel:
+            - Unix supporte aussi des priorités temps réel
+                pour les processus nécessitant un comportement prévisible et une faible latence.
+                Ces priorités sont plus strictes et souvent gérées séparément des priorités des processus réguliers.
+
 
 
 
@@ -51,19 +94,26 @@ Les réponses:
 
 
 Les réponses:
-    TO DO
+    1) Donner la priorité du fichier qui a 3 lettres et l'extension `cfg` à root.
+
+    2) Compter le nombre de fichiers qui ont les droits d'exécutions pour tout le monde.
+
+    3) Enlever les droits d'écriture pour les autres `others` pour
+        tous les fichiers avec l'extension `sh` dans le répertoire ./
+
+    4) Compter le nombre d'images avec l'extension `png` dans le répertoire Images/
+        et ses sous-répertoires.
+
+
 
 
 
 
 /*
-
     Exercice 3: Changement de base (4 points)
 
     49 6E 63 72 6F 79 61 62 6C 65 21
     Qu'esseyait donc d'écrire le programme éxécuté?
-
-
 
 
     On peut transformer tous les chiffres en décimal/binaire comme vous voulez.
@@ -74,6 +124,7 @@ Les réponses:
     I  n  c  r  o  y  a  b  l  e  !            
  
 */
+
 
 
 /*
@@ -130,17 +181,17 @@ CD  01 | 1  | 0  | 0  | 1
 Exercice 6: Statistiques sur Premier Langage Platon (6 points)
 
 Les commandes UNIX to do ce week-end
-1)
+1) 
 
-2)
+2) 
 
-3)
+3) 
 
-4)
+4) 
 
-5)
+5) 
 
-6)
+6) 
 
 
 
