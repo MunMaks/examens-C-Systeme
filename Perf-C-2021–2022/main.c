@@ -88,7 +88,7 @@ char xx;
 // char = char **
     xx    = &x + 1;
 
-Donc on doit prendre deux fois son adresse:
+Donc on doit prendre deux fois déréferencement:
     char = char
     xx =  *(*(&x + 1));
 */

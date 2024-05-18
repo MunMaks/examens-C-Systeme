@@ -45,7 +45,7 @@ int deux_enfants(Arbre a){
 
 
 /*
-    La fonctionne auxiliaire
+    La fonctionne auxiliaire pour complet()
 */
 int complet_aux(Arbre a, int *hauteur){
     if (!a) { *hauteur = -1; return 1; }
@@ -78,7 +78,7 @@ int complet(Arbre a){
 
 
 /*
-    Exercice 2. QuadTree.
+    Exercice 2. QuadTree (6,5 points)
 */
 
 #define MAX 512
@@ -94,17 +94,17 @@ typedef struct Qneu{
 Qnoeud *alloue_noeud(unsigned char c){
 
     Qnoeud *new_noeud = malloc(sizeof(*new_noeud));
-    if (!nouveauNoeud) {
+    if (!new_noeud) {
         fprintf(stderr, "Pas de memoire\n");
         return NULL;
     }
 
-    nouveauNoeud->couleur = c;
+    new_noeud->couleur = c;
 
     for (int i = 0; i < 4; i++)
-        nouveauNoeud->fils[i] = NULL;
+        new_noeud->fils[i] = NULL;
 
-    return nouveauNoeud;
+    return new_noeud;
 }
 
 
@@ -172,15 +172,10 @@ void remplir_image(Qnoeud *noeud, unsigned char image[][MAX], int x, int y, int 
 }
 
 
-void arbre_2_img(Qarbre a, unsigned char[][MAX]){
+void arbre_2_img(Qarbre a, unsigned char image[][MAX]){
     if (!a) return;
     remplir_image(a, image, 0, 0, MAX);
 }
-
-
-
-
-
 
 
 
@@ -193,14 +188,14 @@ int img_2_arbre_helper(unsigned char image[][MAX], int x, int y, int taille, Qar
 
     if (est_monochrome(image, x, y, taille)) {
         unsigned char couleur = image[x][y];
-        *noeud = alloue_noeud(couleur);
-        if (!*noeud) {
+        if (!(*noeud = alloue_noeud(couleur))) {
+            fprintf(stderr, "Pas de memoire pour couleur: %c\n", couleur);
             return 0;
         }
         return 1;
     } else {
         if (!(*noeud = alloue_noeud(0))) {
-            fprintf(stderr, "Pas de memoire\n");
+            fprintf(stderr, "Pas de memoire pour malloc 0\n");
             return 0;
         }
         int demiTaille = taille / 2;
@@ -213,8 +208,6 @@ int img_2_arbre_helper(unsigned char image[][MAX], int x, int y, int taille, Qar
         return 1;
     }
 }
-
-
 
 
 int img_2_arbre(unsigned char image[][MAX], Qarbre *a){

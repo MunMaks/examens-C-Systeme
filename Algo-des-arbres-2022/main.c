@@ -119,11 +119,109 @@ Exercice 2. Insertions et suppressions dans différents types d’arbres (6 poin
         (b) Dessiner chaque arbre binaire de recherche obtenus après suppression des nombres 10, 1, 6 et 9 dans l’arbre précédent
 
     2. (a) Dessiner les arbres de type AVL obtenus après les ajouts suivants : 6, 4, 2, 7, 8, 5, 3, 1.
-        On précisera bien toutes les rotations qui seront effectuées et sur quels noeuds elles sont réalisées ;
+        On précisera bien toutes les rotations qui seront effectuées et sur quels noeuds elles sont réalisées;
         l’arbre sera dessiné avant et après chaque rotation.
 */
 
-/* TO DO */
+/*
+1. (a)
+               6
+            /     \
+           4       9
+          / \     / \
+         1   5   7   10
+          \       \
+           3       8
+          /
+         2
+
+1. (b)
+suppression de 10:
+
+               6
+            /     \
+           4       9
+          / \     / 
+         1   5   7   
+          \       \
+           3       8
+          /
+         2
+
+suppression de 1:
+
+               6
+            /     \
+           4       9
+          / \     / 
+         3   5   7   
+       /          \
+      2            8
+
+
+suppression de 6:
+
+               5
+            /     \
+           4       9
+          /       / 
+         3       7   
+        /         \
+       2           8
+
+
+suppression de 9:
+
+               5
+            /     \
+           4       7
+          /         \
+         3           8
+        /
+       2
+
+
+2. (a) Dessiner les arbres de type AVL obtenus après les ajouts suivants : 6, 4, 2, 7, 8, 5, 3, 1.
+
+    Je vous donne tous les rotations nécessaires et le résultat:
+    - rotation droite sur 6
+    - rotation gauche sur 6
+    - rotation droite-gauche sur 7
+
+               6
+            /     \
+           4       7
+          / \       \
+         2   5       8
+        / \            
+       1   3             
+
+
+2. (b)
+Dessiner l'arbre AVL obtenu après suppression du nombre 13 dans l'AVL:
+                 9
+            /         \
+           6           12
+          / \         / \
+         2   7       11  13
+        / \   \     /   
+       1   4   8   10   
+          /
+         3
+
+
+
+la réponse: (On doit effectuer rotation droite-droite)
+
+                 6
+            /          \
+           2            9 
+          / \        /     \
+         1   4      7       11 
+             /       \     /  \ 
+            3         8   10   12 
+
+*/
 
 
 
@@ -276,14 +374,16 @@ void affichePrefixe(ArbreL A, char *pref){
 
     Les réponses:
     1) l'ajout s'effectue en O(hauteur) ou dans ce cas c'est O(log2(N)), avec N - nombre de noeuds
-    2) la suppression s'effectue en 0(1), car il faut soustraire directement la racine
+        car au pire il faut cas comparer hauteur fois, donc c'est log2(N) fois pour le placer dans un bon endroit.
+    2) la suppression s'effectue en O(log2(N))
+        car au pire il faut soustraire la racine et après il faut équilibrer et changer les valeurs du tableau log2(N) fois
 */
 
 
 /*
     Exercice 6. AVL (1,5 points)
-    1. Quel est le nombre maximum de noeuds d’un arbre AVL de hauteur 6 ?
-    2. Quel est le nombre minimum de noeuds d’un arbre AVL de hauteur 6 ?
+    1. Quel est le nombre maximum de noeuds d’un arbre AVL de hauteur 6?
+    2. Quel est le nombre minimum de noeuds d’un arbre AVL de hauteur 6?
     Justifiez vos réponses
 
 
@@ -305,12 +405,13 @@ void affichePrefixe(ArbreL A, char *pref){
 
 
 
-    2) F_6 = F_5 + F_4 (Fibonacci autrement dit, car il faut le minimum de noeud pour chaque hauteur)
-    Avec la formule suivante:
-    hauteur = -1, donc il faut 0 noeuds
-    hauteur = 0, donc il faut 1 noeud
+    2) D'après le cours, avec la formule suivante:
+    {
+        hauteur = -1, donc il faut 0 noeuds
+        hauteur = 0, donc il faut 1 noeud
+    }
 
-    hauteur = n, donc il faut 1 + hauteur_min(n-2) + hauteur_min(n-1)
+        hauteur = n, donc il faut 1 + hauteur_min(n - 2) + hauteur_min(n - 1)
 
     J'écris directement la réponse:
         hauteur -1: 0 noeuds
@@ -323,6 +424,7 @@ void affichePrefixe(ArbreL A, char *pref){
         hauteur 6: 33 noeuds
         hauteur 7: 54 noeuds
         ...
+    Donc la réponse est `20` noeuds minimum pour avoir l'arbre AVL de hauteur 6?
 */
 
 
