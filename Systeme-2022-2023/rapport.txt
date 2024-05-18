@@ -15,11 +15,134 @@
 
 
 
+/*
+    Exercice 1: Questions relatives aux cours (4 points)
+
+1) Citez des exemples de primitives dans une UAL(unité arithmétique logique) de processus?
+
+2) Quelles informations peut-on trouver dans une inode d'un fichier?
+
+3) Dans quel organe d'un ordinateur se trouve la mémoire la plus grande?
+    Quelles sont les caractéristiques de cette mémoire.
+
+4) Comment fonctionnent les priorités des processus sous Unix?
+
+*/
+
+Les réponses:
+    TO DO
 
 
 
 
-TO DO
+/*
+
+    Exercice 2: Lire dans les pensées (4 points)
+
+    1) chown root ???.cfg
+
+    2) ls -l | grep -e "-..x..x..x" | wc -l
+
+    3) find . -name "*.sh" | xargs chmod o-w
+
+    4) ls -R ~/Images/ | grep -e ".png$" | wc -l
+
+*/
+
+
+Les réponses:
+    TO DO
+
+
+
+
+/*
+
+    Exercice 3: Changement de base (4 points)
+
+    49 6E 63 72 6F 79 61 62 6C 65 21
+    Qu'esseyait donc d'écrire le programme éxécuté?
+
+
+
+
+    On peut transformer tous les chiffres en décimal/binaire comme vous voulez.
+    A la fin, nous avons une feuille avec le tableau ASCII.
+    Je vous recommande fortement de l'utiliser. 
+
+    49 6E 63 72 6F 79 61 62 6C 65 21
+    I  n  c  r  o  y  a  b  l  e  !            
+ 
+*/
+
+
+/*
+    Exercice 4. Maximum sur trois valeurs(4 points)
+*/
+
+
+// si vous voulez tester sur Platon
+// vous pouvez changer `a` à `#-1`, c'est pour que Platon accepte votre solution
+
+1. ld $20 a
+2. ld $21 #0
+3. ld $22 #1
+4. cmp #0
+5. bfup 7
+6. bfdn 8
+7. mv #0 a
+8. cmp #1
+9. bfup 11
+10. bfdn 13
+11. st #1 $23
+12. exit $23
+13. st a $23
+14. exit $23
+
+
+/*
+    Exercice 5: Damier binaire (4 points)
+*/
+
+                AB
+         00   01   10   11
+    00 | 0  | 1  | 1  | 0
+CD  01 | 1  | 0  | 0  | 1
+    10 | 1  | 0  | 0  | 1
+    11 | 0  | 1  | 1  | 0
+
+1) une expression logique algébrique: (A xor B) xor (C xor D)
+
+
+2)
+
+    A   B   C   D
+    |   |   |   |
+     xor     xor
+       \     /   
+        \   /    
+         xor
+          |
+       résultat
+
+
+
+Exercice 6: Statistiques sur Premier Langage Platon (6 points)
+
+Les commandes UNIX to do ce week-end
+1)
+
+2)
+
+3)
+
+4)
+
+5)
+
+6)
+
+
 
 
 
