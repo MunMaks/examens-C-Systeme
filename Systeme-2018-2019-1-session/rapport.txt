@@ -27,16 +27,17 @@ Exercice 1 : Ouais, j’ai lu le cours 5 minutes... (4 points)
 Les réponses:
 1)
     1.1) Mémoire vive (RAM) : C'est la mémoire principale de l'ordinateur où les programmes et les données sont
-                            chargés temporairement pendant qu'ils sont en cours d'utilisation
+            chargés temporairement pendant qu'ils sont en cours d'utilisation
 
-    1.2) Mémoire de stockage (morte) (disque dur ou SSD) : Le disque dur ou le SSD (Solid State Drive) est utilisé pour
-                            stocker de manière permanente les programmes, les fichiers et le système d'exploitation de l'ordinateur
+    1.2) Mémoire de stockage (morte) (disque dur(HDD) ou SSD) : Le disque dur ou le SSD est utilisé pour
+            stocker de manière permanente les programmes,
+            les fichiers et le système d'exploitation de l'ordinateur
 
     1.3) Mémoire cache : La mémoire cache est une mémoire intermédiaire située entre le processeur et la RAM
 
     1.4) Mémoire graphique (VRAM) : La mémoire graphique, également appelée VRAM (Video RAM),
-                                    est utilisée par la carte graphique pour stocker les données d'image et de texture
-                                    temporaires nécessaires à l'affichage sur l'écran
+            est utilisée par la carte graphique pour stocker les données d'image et de texture
+            temporaires nécessaires à l'affichage sur l'écran
 
 
 2) Les systèmes d'exploitation de type Unix sont caractérisés par leur architecture modulaire,
@@ -49,8 +50,10 @@ Les réponses:
     de contrôler les utilisateurs et les permissions, d'interagir avec les données et d'accéder aux ressources réseau.
 
 4) Le pipe `|` en bash permet de rediriger la sortie (stdout) d'une commande vers l'entrée (stdin) d'une autre commande.
-    Cela permet de chaîner plusieurs commandes ensemble, créant ainsi des flux de données entre elles.
-    Les pipes sont utiles pour combiner des commandes simples et effectuer des opérations complexes en une seule ligne de commande.
+    Cela permet de chaîner plusieurs commandes ensemble,
+    créant ainsi des flux de données entre elles.
+    Les pipes sont utiles pour combiner des commandes simples et effectuer
+    des opérations complexes en une seule ligne de commande.
 
 
 
@@ -81,19 +84,16 @@ Les réponses:
 
 2) $ find my_code -name "*.py" | xargs cat | grep "^[ ]*for"
 
-    Recherche tous les fichiers Python dans le répertoire my_code et ses sous-répertoires,
-    affiche le contenu de chaque fichier, puis recherche toutes les lignes de code
-    contenant des boucles for dans ces fichiers, en affichant le résultat final
+    Afficher tous les lignes qui contient le boucle for dans les fichiers python,
+    dans le répertoire `my_code` et dans ses sous-répertoires.
+
 
 
 3) cat personnes.csv | grep "Martin" | wc -l
+    Compter le nombre de gens qui ont le prénom "Martin".
 
-    Compter le nombre de lignes qui contenant le prénom "Martin".
 
-
-Ici je suis pas sûr...
 4) cat personnes.csv | cut -f 3 -d ',' | uniq | sort | wc -l
-
     Afficher le nombre de prénoms uniques présents dans le fichier personnes.csv
 
 
@@ -235,7 +235,20 @@ Listes des taches:
 
 
 La réponse:
-    Je ne sais pas comment le faire, si vous avez une idée, je suis ouvert à votre proposition.
+
+    Les processus forts `(init_A, init_B, init_C)` sont exécutés en premier dès leur création.
+    Ensuite, les processus normaux `(corps_A, corps_B, corps_C)` sont exécutés.
+    Enfin, les processus faibles `(display_A, display_B, display_C)` sont exécutés.
+
+
+    Les dates de fin d'exécution des processus display_X sont:
+        - dA au quantum 18,
+        - dB au quantum 19,
+        - dC au quantum 20.
+
+
+    Quantum:   0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17 18 19 20
+    Tâches:    iA iA iB iB iB iC iC iC iC cA cA cA cB cB cB cB cC dA dB dC -
 
 
 
