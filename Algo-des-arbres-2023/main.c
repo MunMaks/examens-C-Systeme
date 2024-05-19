@@ -312,6 +312,19 @@ Le forêt:
    F_1  F_0
 
 
+Je pense qu'ils préfèrent cette version:    
+1) Fibonacci F_4 minimal (héréditairement gauche)
+              F_4
+          /         \
+        F_3         F_2
+       /   \       /   
+      F_2  F_1    F_1  
+     /  
+   F_1  
+
+
+
+
 2) L'ordre d'insertion des entiesr 1, 2, ..., 7 dans un AVL initialement vide qui
     permet d'obtenir F_4 sans qu'une rotation soit nécessaire pour équilibrer l'arbre.
     Justifiez la réponse.
@@ -319,14 +332,14 @@ Le forêt:
 
                5
           /        \
-         3           6
-       /   \          \
-      2     4          7
+         3           7
+       /   \        /
+      2     4      6
      /
     1
 
 On doit effectuer l'insertion dans l'ordre suivant:
-    5, 3, 6, 2, 4, 7, 1
+    5, 3, 7, 2, 4, 6, 1
     Pourquoi?
     Car on fait l'ajout BFS (en largeur), donc si on fait comme ça
     On assure que on effectue l'insertion des noeuds sans rotations
@@ -341,52 +354,35 @@ D'après la question précédente on obtient l'ordre suivant:
 
 
 
-
 4) l'ordre des d'insertion pour effectuer seulement une rotation gauche:
+    (c'est encoire fois l'ajout en largeur, et après faisant ça, vous devriez faire une rotation gauche)
+    3, 2, 5, 4, 7, 6, 1
 
-    4, 1, 6, 2, 5, 7, 3
+               5
+          /        \
+         3           7
+       /   \        /
+      2     4      6
+     /
+    1
 
-               4
-            /     \
-           1       6
-          / \     / \
-         2   3   5   7
 
 
 
 5) l'ordre des d'insertion pour effectuer seulement une rotation droite-gauche
 
-    4, 2, 5, 1, 3, 7, 6
+    3, 2, 6, 5, 7, 4, 1
 
-               4
-            /     \
-           2       6
-          / \     / \
-         1   3   5   7
+               5
+          /        \
+         3           6
+       /  \           \
+      2    4           7
+     /
+    1                     
 
+Ici, je n'ai pas réussi à faire héréditairement gauche,
+Pourtant c'est toujous Fibonacci AVL minimal F_4 (7 noeuds, hauteur 3).
 
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
