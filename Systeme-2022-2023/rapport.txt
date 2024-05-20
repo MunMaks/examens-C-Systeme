@@ -93,7 +93,7 @@ Les réponses:
 
 
 Les réponses:
-    1) Donner la priorité du fichier qui a 3 lettres et l'extension `cfg` à root.
+    1) Donner la propriété de tous les fichiers qui ont 3 lettres et l'extension `cfg` en tant qu'utilisateur root.
 
     2) Compter le nombre de fichiers qui ont les droits d'exécutions pour tout le monde.
 
@@ -180,7 +180,7 @@ CD  01 | 1  | 0  | 0  | 1
 Exercice 6: Statistiques sur Premier Langage Platon (6 points)
 
     log.csv:
-    indices:  1       2       3        4        5           6        7       8   
+    indices:  1       2       3        4        5           6        7       8
             login, exo_id, exo_name, note, graine_alea, timestamp, tp_id, tp_name
 
 
