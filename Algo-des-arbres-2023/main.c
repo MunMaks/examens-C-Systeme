@@ -67,8 +67,8 @@ int complet(Arbre a){
 
     int hauteur_fg = 0, hauteur_fd = 0;
 
-    int left = complet_aux(a->fg, hauteur_fg);
-    int right = complet_aux(a->fd, hauteur_fd);
+    int left = complet_aux(a->fg, &hauteur_fg);
+    int right = complet_aux(a->fd, &hauteur_fd);
 
     return left && right && hauteur_fd == hauteur_fg;
 }
