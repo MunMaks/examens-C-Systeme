@@ -1,4 +1,12 @@
 /*
+    Préparé par MUNAITPASOV M.
+    Université Gustave Eiffel
+
+    Pour trouver la question souhaitée, cherchez par Exercice
+*/
+
+
+/*
                         L2 Algorithmique des arbres
                               Durée 2 heures.
                 Notes de cours, de TD et de TP autorisées.

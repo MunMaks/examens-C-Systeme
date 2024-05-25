@@ -1,3 +1,11 @@
+/*
+    Préparé par MUNAITPASOV M.
+    Université Gustave Eiffel
+
+    Pour trouver la question souhaitée, cherchez par Exercice
+*/
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
