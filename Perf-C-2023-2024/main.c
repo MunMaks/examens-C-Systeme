@@ -5,7 +5,6 @@
     Pour trouver la question souhaitée, cherchez par [Qn], avec n = {1, ..., 15}
 */
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
@@ -24,11 +23,20 @@
     7. p = index(t, a);                                 7.     return a + b;
     8. p[1] = 0;                                        8. }
 
+
+    Effets secondaires:    
+    ligne 1: initialisation de trois variables à la valeur inconnue (effet secondaire).
+    ligne 2: c'est la compraison (qui n'est pas effet secondaire),
+        mais la fonction appelée affecte la valeur cinq 5 à `b` (même si une variable locale)
+        c'est toujours effet secondaire.
+    ligne 5: (7 < 6) n'est pas vérifiée donc on exécute ligne 5, mais elle affecte la valeur 2 à `a`!
+    ligne 7: effet secondaire car on affecte l'adresse de `tableau[a]` au pointeur `p`.
+    ligne 8: effet secondaire car on affecte la valeur 0 à l'adresse suivant de `p`
+        qui est équivalent à `&(tableau[a+1])`.
 */
 
-/*
-    TO DO
-*/
+
+
 
 /*
     [Q2] Donner les erreurs présentes dans cet extrait de code, indiquer s'il compile et proposer une correction.
