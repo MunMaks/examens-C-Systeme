@@ -263,7 +263,6 @@ int test(f_2 var){
         un pointeur sur une fonction `test` à type de retour `int` et à un paramètre de type `int`.
         La fonction renvoie un tableau dont les premiers éléments sont les éléments
         pour lesquels `test` renvoie 0, et les derniers sont les autres éléments.
-
 */
 
 int *separe(int tab[], int taille, int (*test)(int)){
@@ -294,9 +293,8 @@ int *separe(int tab[], int taille, int (*test)(int)){
         2) on peut recopier tous les éléments dans `tab` et libérer `arr`
     */
 
-    /*  1)
-        return arr;
-    */
+    // 1)
+    // return arr;
     
     // 2)
     for (i = 0; i < taille; ++i) { tab[i] = arr[i]; }
@@ -307,54 +305,84 @@ int *separe(int tab[], int taille, int (*test)(int)){
 
 
 
+/*
+    [Q13] Définir un type `NoeudGenerique` permettant de représenter un noeud d'un arbre binaire générique,
+        c'est-à-dire dont le type des valeurs n'est pas fixé.
+        Donner en justifiant le prototype d'une fonction permettant d'afficher les valeurs d'un arbre binaire générique.
+*/
+
+typedef struct noeud{
+    void *val;          /* un pointeur de quelque chose */
+    struct noeud *fg;
+    struct noeud *fd;
+} NoeudGenerique;
+
+typedef enum {
+    CHAR, SHORT, INT, LONG, FLOAT, DOUBLE, STRING, STRUCTURE // etc... on peut continuer
+} TYPE_VAL;
+
+/**
+ * @brief Cette fonction effectue l'affichage d'un arbre binaire générique
+ * Elle affiche la valeur stochée dans chaque noeud de cet arbre d'après le type souhaité.
+*/
+void affiche(NoeudGenerique *arbre, TYPE_VAL type_val);
 
 
 
+/*
+    [Q14] En utilisant la fonction `miroir_8bit` (supposée correctement implémentée),
+        proposer une fonction permettant de modifier une zone mémoire spécifiée
+        par son adresse et sa taille en son miroire bit à bit.
+*/
+
+
+void miroir_zone(void *adresse, size_t taille) {
+    // convertit l'adresse en pointeur (unsigned char)
+    u8* ptr = (u8*)adresse;
+    for (size_t i = 0; i < taille; ++i) {
+        ptr[i] = miroir_8bit(ptr[i]);
+    }
+}
+
+/*
+// pour tester, vous pouvez utiliser ça:
+int main(void) {
+    u8 data[4] = {0x01, 0xAB, 0x50, 0x31};
+    int taille = 4;
+
+    printf("Avant modification:\n");
+    for (int i = 0; i < taille; ++i) { printf("%02X ", data[i]); } printf("\n");
+
+    miroir_zone(data, taille);
+
+    printf("Après modification:\n");
+    for (int i = 0; i < taille; ++i) { printf("%02X ", data[i]); } printf("\n");
+    return 0;
+}
+*/
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/*
+    [Q15] Ecrire une fonction main permettant de tester les fonctions `nom_base` et `miroir_8bit`.
+*/
 
 
 int main(int argc, char *argv[]){
+    u8 a = 8+16+64;
+    u8 b = 2+8+16;
+
+    printf("première test: %d\ndexième test: %d\n", miroir_8bit(a) == b, miroir_8bit(b) == a);
+    
+    char *chemin_un = "/home/padawan/perfc/tp1.c";
+    char *chemin_deux = "/home/padawan/perfc/";
+    char *chemin_trois = "tp1.c";
+    char *chemin_quatre = "";
+
+    printf("Nom de base de '%s' est '%s'\n", chemin_un, nom_base(chemin_un));
+    printf("Nom de base de '%s' est '%s'\n", chemin_deux, nom_base(chemin_deux));
+    printf("Nom de base de '%s' est '%s'\n", chemin_trois, nom_base(chemin_trois));
+    printf("Nom de base de '%s' est '%s'\n", chemin_quatre, nom_base(chemin_quatre));
+
     return 0;
 }
