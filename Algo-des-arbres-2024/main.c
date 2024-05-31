@@ -169,9 +169,74 @@ void liberer(Pile *p);
 
 
 
-/* TO DO 1, 2, 3, 4*/
+
+/*
+    1) Cours
+*/
 
 
+
+/*
+    2) Cours
+*/
+
+
+/*
+    3) Cours
+*/
+
+
+/*
+    4) 
+*/
+
+typedef struct {
+    Pile *T;
+    int N;
+    int m;
+} Tas;
+
+/*
+    a)
+*/
+
+int Fils(Tas *tas, int i);
+
+
+/*
+    b) *tas contient un tableau T non vide
+*/
+
+void descente(Tas *tas);
+
+
+/*
+    c) *sortant contiendra la valeur supprimée.
+    On pensera à libérer tout espace mémoire devenu inutile.
+*/
+
+int suppr(Tas *tas, int *sortant);
+
+
+/*
+    5) Donner un algorithme en O (N * ln(N))
+    La réponse sera justifiée
+*/
+
+
+
+/*
+    Exercice 4. Insertions et suppressions dans un AVL. (4,75 points)
+
+
+    l'arbre A suivant:
+
+                    4
+                  /   \
+                 2     5
+                / \
+               1   3
+*/
 
 
 
